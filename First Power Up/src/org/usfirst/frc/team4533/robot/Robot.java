@@ -1,11 +1,15 @@
 package org.usfirst.frc.team4533.robot;
 
+import org.usfirst.frc.team4533.robot.subsystems.DriveSystem;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 
 public class Robot extends IterativeRobot {
 	
+	public static DriveSystem driveSystem;
+	
 	public void robotInit() {
-		
+		driveSystem = new DriveSystem();
 	}
 	public void disabledInit() {
 		
