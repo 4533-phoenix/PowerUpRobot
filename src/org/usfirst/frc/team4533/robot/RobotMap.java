@@ -1,10 +1,10 @@
 package org.usfirst.frc.team4533.robot;
 
 public class RobotMap {
-	public static int MOTOR_RIGHT_MASTER = 0; //These are placeholder values for the motors
-	public static int MOTOR_LEFT_MASTER = 1;
-	public static int MOTOR_RIGHT_SLAVE = 2;
-	public static int MOTOR_LEFT_SLAVE = 3;
+	public static int MOTOR_RIGHT_MASTER = 4; //These are placeholder values for the motors
+	public static int MOTOR_LEFT_MASTER = 3;
+	public static int MOTOR_RIGHT_SLAVE = 5;
+	public static int MOTOR_LEFT_SLAVE = 1;
 	public static int RIGHT_STICK_BUTTON = 12;
 	public static int LEFT_STICK_BUTTON = 11;
 	public static int START_BUTTON = 10;
