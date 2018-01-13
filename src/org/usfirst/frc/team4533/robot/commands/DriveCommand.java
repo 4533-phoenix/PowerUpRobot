@@ -1,6 +1,8 @@
 package org.usfirst.frc.team4533.robot.commands;
 
 import org.usfirst.frc.team4533.robot.Robot;
+import org.usfirst.frc.team4533.robot.RobotMap;
+import org.usfirst.frc.team4533.robot.subsystems.DriveSystem;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
@@ -8,14 +10,15 @@ import edu.wpi.first.wpilibj.command.Command;
 public class DriveCommand extends Command {
 	
 	private Joystick controller;
+	private DriveSystem driveSystem = DriveSystem.getInstance();
 	
 	public DriveCommand() {
-		controller = new Joystick(0);
-		requires(Robot.driveSystem);
+		controller = new Joystick(RobotMap.JOYSTICK_PORT);
+		requires(DriveSystem.getInstance());
 	}
 	
 	protected void execute() {
-		Robot.driveSystem.drivingControls(this.controller);
+		driveSystem.drivingControls(controller);
 	}
 	
 	protected boolean isFinished() {

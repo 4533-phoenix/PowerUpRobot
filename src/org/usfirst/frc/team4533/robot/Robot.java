@@ -8,12 +8,10 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 public class Robot extends IterativeRobot {
 	
-	public static DriveSystem driveSystem;
-	public static OI oi;
+
 	//public static NameOfAutonomousCommand autonomousCommand;
 	public void robotInit() {
-		driveSystem = new DriveSystem();
-		oi = new OI();
+		DriveSystem.initialize();
 	}
 	public void disabledInit() {
 		

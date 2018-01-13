@@ -3,8 +3,7 @@ package org.usfirst.frc.team4533.robot.subsystems;
 import org.usfirst.frc.team4533.robot.RobotMap;
 import org.usfirst.frc.team4533.robot.commands.DriveCommand;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -12,18 +11,16 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class DriveSystem extends Subsystem {
 	
 	private static DriveSystem INSTANCE;
-	TalonSRX leftMaster;
-	TalonSRX leftSlave;
-	TalonSRX rightMaster;
-	TalonSRX rightSlave;
-	Joystick stick;
+	WPI_TalonSRX leftMaster;
+	WPI_TalonSRX leftSlave;
+	WPI_TalonSRX rightMaster;
+	WPI_TalonSRX rightSlave;
 	
 	public DriveSystem() {
-		rightMaster = new TalonSRX(RobotMap.MOTOR_RIGHT_MASTER);
-		leftMaster = new TalonSRX(RobotMap.MOTOR_LEFT_MASTER);
-		rightSlave = new TalonSRX(RobotMap.MOTOR_RIGHT_SLAVE);
-		leftSlave = new TalonSRX(RobotMap.MOTOR_LEFT_SLAVE);
-		stick = new Joystick(0);
+		rightMaster = new WPI_TalonSRX(RobotMap.MOTOR_RIGHT_MASTER);
+		leftMaster = new WPI_TalonSRX(RobotMap.MOTOR_LEFT_MASTER);
+		rightSlave = new WPI_TalonSRX(RobotMap.MOTOR_RIGHT_SLAVE);
+		leftSlave = new WPI_TalonSRX(RobotMap.MOTOR_LEFT_SLAVE);
 	}
 	public static void initialize() {
 		if(INSTANCE == null) {
@@ -35,10 +32,10 @@ public class DriveSystem extends Subsystem {
 	}
 	public void driveAction(double left, double right) {
 		//This method used to actually drive the robot
-		this.leftMaster.set(ControlMode.Current, left);
-		this.rightMaster.set(ControlMode.Current, right);
-		this.leftSlave.set(ControlMode.Current, RobotMap.MOTOR_LEFT_MASTER);
-		this.rightSlave.set(ControlMode.Current, RobotMap.MOTOR_RIGHT_MASTER);
+		this.leftMaster.set(-left);
+		this.rightMaster.set(right);
+		this.leftSlave.set(leftMaster.get());
+		this.rightSlave.set(rightMaster.get());
 	}
 	public void drivingControls(Joystick j) {
 		//Defaulting to tank drive as I know how to code tank drive.

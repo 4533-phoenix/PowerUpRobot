@@ -1,6 +1,9 @@
 package org.usfirst.frc.team4533.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
+
 public class OI {
+	Joystick stick = new Joystick(RobotMap.JOYSTICK_PORT);
 	private static OI INSTANCE;
 	OI() {
 		
