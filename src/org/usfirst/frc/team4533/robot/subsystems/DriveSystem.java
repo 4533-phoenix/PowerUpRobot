@@ -3,6 +3,7 @@ package org.usfirst.frc.team4533.robot.subsystems;
 import org.usfirst.frc.team4533.robot.RobotMap;
 import org.usfirst.frc.team4533.robot.commands.DriveCommand;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -34,8 +35,8 @@ public class DriveSystem extends Subsystem {
 		//This method used to actually drive the robot
 		this.leftMaster.set(-left);
 		this.rightMaster.set(right);
-		this.leftSlave.set(leftMaster.get());
-		this.rightSlave.set(rightMaster.get());
+		this.leftSlave.set(ControlMode.Follower, RobotMap.MOTOR_LEFT_MASTER);
+		this.rightSlave.set(ControlMode.Follower, RobotMap.MOTOR_RIGHT_MASTER);
 	}
 	public void drivingControls(Joystick j) {
 		//Defaulting to tank drive as I know how to code tank drive.
