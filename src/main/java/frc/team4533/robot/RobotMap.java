@@ -1,4 +1,4 @@
-package org.usfirst.frc.team4533.robot;
+package frc.team4533.robot;
 
 public class RobotMap {
 	public static int JOYSTICK_PORT = 0;
