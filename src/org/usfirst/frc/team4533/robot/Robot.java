@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4533.robot;
 
+import org.usfirst.frc.team4533.robot.commands.AutonomousCommand;
 import org.usfirst.frc.team4533.robot.subsystems.DriveSystem;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -9,9 +10,10 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 public class Robot extends IterativeRobot {
 	
 
-	//public static NameOfAutonomousCommand autonomousCommand;
+	public static AutonomousCommand autonomousCommand;
 	public void robotInit() {
 		DriveSystem.initialize();
+		autonomousCommand = new AutonomousCommand();
 	}
 	public void disabledInit() {
 		
@@ -20,15 +22,15 @@ public class Robot extends IterativeRobot {
 		Scheduler.getInstance().run();
 	}
 	public void autonomousInit() {
-		
+		autonomousCommand.start();
 	}
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
 	}
 	public void teleopInit() {
-//		if(autonomousCommand != null) {
-//			autonomousCommand.cancel();
-//		}
+		if(autonomousCommand != null) {
+			autonomousCommand.cancel();
+		}
 	}
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
