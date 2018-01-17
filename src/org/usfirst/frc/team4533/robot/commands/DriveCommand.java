@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class DriveCommand extends Command {
 	
-	private Joystick controller;
 	private DriveSystem driveSystem = DriveSystem.getInstance();
+	private Joystick controller;
 	
 	public DriveCommand() {
 		controller = new Joystick(RobotMap.JOYSTICK_PORT);

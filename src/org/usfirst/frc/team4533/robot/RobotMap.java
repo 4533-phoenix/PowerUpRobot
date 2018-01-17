@@ -1,11 +1,15 @@
 package org.usfirst.frc.team4533.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
+
 public class RobotMap {
 	public static int JOYSTICK_PORT = 0;
-	public static int MOTOR_RIGHT_MASTER = 4; //These are placeholder values for the motors
+	public Joystick controller = new Joystick(JOYSTICK_PORT);
+	public static int MOTOR_RIGHT_MASTER = 6; //These are placeholder values for the motors
 	public static int MOTOR_LEFT_MASTER = 3;
-	public static int MOTOR_RIGHT_SLAVE = 5;
+	public static int MOTOR_RIGHT_SLAVE = 2;
 	public static int MOTOR_LEFT_SLAVE = 1;
+	public static int MOTOR_INTAKE = 0;
 	public static int RIGHT_STICK_BUTTON = 12;
 	public static int LEFT_STICK_BUTTON = 11;
 	public static int START_BUTTON = 10;
@@ -18,4 +22,7 @@ public class RobotMap {
 	public static int B_BUTTON = 3;
 	public static int A_BUTTON = 2;
 	public static int X_BUTTON = 1;
+	
+	
+	
 }
