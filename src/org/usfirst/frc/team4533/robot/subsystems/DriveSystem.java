@@ -35,7 +35,6 @@ public class DriveSystem extends Subsystem {
 		//This method used to actually drive the robot
 		this.leftMaster.set(-left);
 		this.rightMaster.set(right);
-		System.out.println(left + " " + right);
 		this.leftSlave.set(ControlMode.Follower, RobotMap.MOTOR_LEFT_MASTER);
 		this.rightSlave.set(ControlMode.Follower, RobotMap.MOTOR_RIGHT_MASTER);
 	}
@@ -64,6 +63,7 @@ public class DriveSystem extends Subsystem {
 	}
 	public void toBaseline() {
 		//There are 217.40 positions per inch of distance for a 6in wheel
+		leftSlave.setSelectedSensorPosition(0, 0, 100);
 		while(leftSlave.getSelectedSensorPosition(0) < 217.40*120) {
 			System.out.println(leftSlave.getSelectedSensorPosition(0));
 			this.leftMaster.set(-1);
@@ -71,5 +71,12 @@ public class DriveSystem extends Subsystem {
 			this.leftSlave.set(ControlMode.Follower, RobotMap.MOTOR_LEFT_MASTER);
 			this.rightSlave.set(ControlMode.Follower, RobotMap.MOTOR_LEFT_MASTER);
 		}
+
+	}
+	public void resetPosition() {
+		leftSlave.setSelectedSensorPosition(0, 0, 100);
+	}
+	public int getPosition() {
+		return leftSlave.getSelectedSensorPosition(0);
 	}
 }

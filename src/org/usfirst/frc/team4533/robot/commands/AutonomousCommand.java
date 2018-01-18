@@ -10,6 +10,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutonomousCommand extends CommandGroup {
 	DriveSystem driveSystem = DriveSystem.getInstance();
 	public AutonomousCommand() {
-		this.addSequential(new DriveToBaselineCommand(), 5);
+		this.addSequential(new DriveDistance(120), 15000);
 	}
 }
