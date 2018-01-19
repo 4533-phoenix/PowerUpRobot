@@ -14,7 +14,6 @@ public class UpdateSmartDashboard extends Command {
     public UpdateSmartDashboard() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	SmartDashboard.putString("LeftWheelsEncoderLabel", "Left Encoder Position:");
     }
 
     // Called just before this Command runs the first time
@@ -23,7 +22,8 @@ public class UpdateSmartDashboard extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	SmartDashboard.putNumber("leftWheelsPositon", driveSystem.getPosition());
+    	SmartDashboard.putNumber("Left Wheels Positon: ", driveSystem.getPosition());
+    	SmartDashboard.putNumber("Left Wheels Distance Traveled: ", -driveSystem.getPosition()/ 217.40);
     }
 
     // Make this return true when this Command no longer needs to run execute()
