@@ -61,13 +61,13 @@ public class DriveSystem extends Subsystem {
 	public void turn(double v, double w) {
 		this.driveAction(v, w);
 	}
-	public void toBaseline() {
+	public void toBaseline(double speed) {
 		//There are 217.40 positions per inch of distance for a 6in wheel
 		leftSlave.setSelectedSensorPosition(0, 0, 100);
 		while(leftSlave.getSelectedSensorPosition(0) < 217.40*120) {
 			System.out.println(leftSlave.getSelectedSensorPosition(0));
-			this.leftMaster.set(-1);
-			this.rightMaster.set(1);
+			this.leftMaster.set(-speed);
+			this.rightMaster.set(speed);
 			this.leftSlave.set(ControlMode.Follower, RobotMap.MOTOR_LEFT_MASTER);
 			this.rightSlave.set(ControlMode.Follower, RobotMap.MOTOR_LEFT_MASTER);
 		}

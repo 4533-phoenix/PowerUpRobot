@@ -14,9 +14,11 @@ public class DriveDistance extends Command {
 
 	private double distance;
 	private DriveSystem driveSystem;
+	private double speed;
 
-	public DriveDistance(double distance) {
+	public DriveDistance(double distance, double speed) {
 		this.distance = distance;
+		this.speed = speed;
 		driveSystem = DriveSystem.getInstance();
 	}
 
@@ -27,7 +29,7 @@ public class DriveDistance extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		driveSystem.forward(1);
+		driveSystem.forward(speed);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

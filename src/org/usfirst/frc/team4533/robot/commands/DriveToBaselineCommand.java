@@ -11,14 +11,15 @@ public class DriveToBaselineCommand extends Command {
 	
 	private DriveSystem driveSystem = DriveSystem.getInstance();
 	private Joystick controller;
-	
-	public DriveToBaselineCommand() {
+	private double speed;
+	public DriveToBaselineCommand(double speed) {
 		controller = new Joystick(RobotMap.JOYSTICK_PORT);
+		this.speed = speed;
 		requires(DriveSystem.getInstance());
 	}
 	
 	protected void execute() {
-		driveSystem.toBaseline();
+		driveSystem.toBaseline(speed);
 	}
 	
 	protected boolean isFinished() {
