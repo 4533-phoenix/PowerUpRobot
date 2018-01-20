@@ -74,9 +74,13 @@ public class DriveSystem extends Subsystem {
 
 	}
 	public void resetPosition() {
-		leftSlave.setSelectedSensorPosition(0, 0, 100);
+		leftMaster.setSelectedSensorPosition(0, 0, 100);
+		rightMaster.setSelectedSensorPosition(0, 0, 100);
 	}
-	public int getPosition() {
-		return leftSlave.getSelectedSensorPosition(0);
+	public int getLeftPosition() {
+		return leftMaster.getSelectedSensorPosition(0);
+	}
+	public int getRightPosition() {
+		return rightMaster.getSelectedSensorPosition(0);
 	}
 }

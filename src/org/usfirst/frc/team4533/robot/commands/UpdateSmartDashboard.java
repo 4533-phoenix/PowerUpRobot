@@ -101,8 +101,10 @@ public class UpdateSmartDashboard extends Command {
     		theirSwitchL = alliance;
     		theirSwitchR = !alliance;
     	}
-    	SmartDashboard.putNumber("Left Wheels Positon: ", driveSystem.getPosition());
-    	SmartDashboard.putNumber("Left Wheels Distance Traveled: ", -driveSystem.getPosition()/ 217.40);    	
+    	SmartDashboard.putNumber("Left Wheels Positon: ", driveSystem.getLeftPosition());
+    	SmartDashboard.putNumber("Left Wheels Distance Traveled: ", -driveSystem.getLeftPosition()/ 217.40);
+    	SmartDashboard.putNumber("Right Wheels Positon: ", driveSystem.getRightPosition());
+    	SmartDashboard.putNumber("Right Wheels Distance Traveled: ", -driveSystem.getRightPosition()/ 217.40);    
     	SmartDashboard.putNumber("Match Number: ", DriverStation.getInstance().getMatchNumber());
     	SmartDashboard.putNumber("Time Left: ", DriverStation.getInstance().getMatchTime());
     	SmartDashboard.putNumber("Driver Station Position: ", DriverStation.getInstance().getLocation());

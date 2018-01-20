@@ -3,8 +3,8 @@ package org.usfirst.frc.team4533.robot;
 public class RobotMap {
 	public static int JOYSTICK_PORT = 0;
 	public static int MOTOR_RIGHT_MASTER = 2; //These are placeholder values for the motors
-	public static int MOTOR_LEFT_MASTER = 3;
-	public static int MOTOR_RIGHT_SLAVE = 6;
+	public static int MOTOR_LEFT_MASTER = 0;
+	public static int MOTOR_RIGHT_SLAVE = 3;
 	public static int MOTOR_LEFT_SLAVE = 1;
 	public static int RIGHT_STICK_BUTTON = 12;
 	public static int LEFT_STICK_BUTTON = 11;

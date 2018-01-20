@@ -34,12 +34,13 @@ public class DriveDistance extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return driveSystem.getPosition() >= 217.40*distance;
+		return driveSystem.getLeftPosition() >= 217.40*distance && driveSystem.getRightPosition() <= -217.40*distance;
 	}
 
 	// Called once after isFinished returns true
 	protected void end() {
-		System.out.println(driveSystem.getPosition()/217.40);
+		System.out.println(driveSystem.getLeftPosition()/217.40);
+		System.out.println(driveSystem.getRightPosition()/21.40);
 		driveSystem.resetPosition();
 	}
 
