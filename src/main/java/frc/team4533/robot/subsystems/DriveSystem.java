@@ -1,7 +1,7 @@
-package org.usfirst.frc.team4533.robot.subsystems;
+package frc.team4533.robot.subsystems;
 
-import org.usfirst.frc.team4533.robot.RobotMap;
-import org.usfirst.frc.team4533.robot.commands.DriveCommand;
+import frc.team4533.robot.RobotMap;
+import frc.team4533.robot.commands.DriveCommand;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -10,13 +10,13 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveSystem extends Subsystem {
-	
+
 	private static DriveSystem INSTANCE;
 	WPI_TalonSRX leftMaster;
 	WPI_TalonSRX leftSlave;
 	WPI_TalonSRX rightMaster;
 	WPI_TalonSRX rightSlave;
-	
+
 	public DriveSystem() {
 		rightMaster = new WPI_TalonSRX(RobotMap.MOTOR_RIGHT_MASTER);
 		leftMaster = new WPI_TalonSRX(RobotMap.MOTOR_LEFT_MASTER);
@@ -48,7 +48,7 @@ public class DriveSystem extends Subsystem {
 		this.setDefaultCommand(new DriveCommand());
 	}
 	//Just some methods we can use in autonomous
-	
+
 	public void forward(double v) {
 		this.driveAction(v, v);
 	}

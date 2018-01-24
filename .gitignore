@@ -1,13 +1,42 @@
-*.class
+# copied from https://github.com/Open-RIO/.gitignore/blob/master/.gitignore
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+# WPILib
+bin/
+build/
+dist/
+sysProps.xml
+workbench.xmi
 
-# Package Files #
-*.jar
-*.war
-*.ear
+# IDE
+*.ipr
+*.iml
+*.iws
+out/
+tmp/
+.settings/
+.loadpath
+.project
+/.idea
+.classpath
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-/bin/
+# Toast/GradleRIO
+run/
+.gradle/
+gradle/.launch/
+
+# OS Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.AppleDouble
+.LSOverride
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# backup files
+*~
+
+# directory for XML generated after running junit tests through ant
+junit/
