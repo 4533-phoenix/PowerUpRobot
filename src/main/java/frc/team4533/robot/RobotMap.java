@@ -18,15 +18,15 @@ public class RobotMap {
 	public static int X_BUTTON = 1;
 
 	// Drive System Mappings
-	public static int MOTOR_LEFT_MASTER = 3;
+	public static int MOTOR_LEFT_MASTER = 0;
 	public static int MOTOR_LEFT_SLAVE = 1;
-	public static int MOTOR_RIGHT_MASTER = 4;
-	public static int MOTOR_RIGHT_SLAVE = 5;
+	public static int MOTOR_RIGHT_MASTER = 2;
+	public static int MOTOR_RIGHT_SLAVE = 3;
 
 	// Intake System Mappings
-	public static int INTAKE_RIGHT = 99;
-	public static int INTAKE_LEFT = 99;
+	public static int INTAKE_LEFT = 5;
+	public static int INTAKE_RIGHT = 6;
 
 	// Swing Arm System Mappings
-	public static int SWING_ARM_MOTOR = 99;
+	public static int SWING_ARM_MOTOR = 4;
 }
