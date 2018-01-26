@@ -42,7 +42,7 @@ public class DriveSystem extends Subsystem {
 		//Defaulting to tank drive as I know how to code tank drive.
 		double leftWheels = j.getRawAxis(3);
 		double rightWheels = j.getY();
-		this.driveAction(leftWheels, rightWheels);
+		this.driveAction(leftWheels*.5, rightWheels*.5);
 	}
 	public void initDefaultCommand() {
 		this.setDefaultCommand(new DriveCommand());
@@ -50,16 +50,16 @@ public class DriveSystem extends Subsystem {
 	//Just some methods we can use in autonomous
 	
 	public void forward(double v) {
-		this.driveAction(v, v);
+		this.driveAction(v*.5, v*.5);
 	}
 	public void backward(double v) {
-		this.driveAction(v, v);
+		this.driveAction(v*.5, v*.5);
 	}
 	public void stop() {
 		this.driveAction(0.0, 0.0);
 	}
 	public void turn(double v, double w) {
-		this.driveAction(v, w);
+		this.driveAction(v*.5, w*.5);
 	}
 	public void toBaseline(double speed) {
 		//There are 217.40 positions per inch of distance for a 6in wheel

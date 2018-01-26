@@ -1,22 +1,23 @@
 package org.usfirst.frc.team4533.robot.commands;
 
-import org.usfirst.frc.team4533.robot.RobotMap;
 import org.usfirst.frc.team4533.robot.subsystems.DriveSystem;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
 public class DriveDistance extends Command {
-
+	private AHRS ahrs;
 	private double distance;
 	private DriveSystem driveSystem;
 	private double speed;
 
 	public DriveDistance(double distance, double speed) {
+		ahrs = new AHRS(SPI.Port.kMXP);
 		this.distance = distance;
 		this.speed = speed;
 		driveSystem = DriveSystem.getInstance();
