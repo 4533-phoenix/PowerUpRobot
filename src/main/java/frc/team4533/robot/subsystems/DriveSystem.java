@@ -16,7 +16,7 @@ public class DriveSystem extends Subsystem {
 	WPI_TalonSRX rightMaster;
 	WPI_TalonSRX rightSlave;
 	private static final int MAX_VELOCITY = 250;
-	private static final int UNITS_PER_REVOLUTION = 4096;
+	public static final int UNITS_PER_REVOLUTION = 4096;
 	private static final int TIMEOUT = 10;
 	private static final int DEFAULT_PID_INDEX = 0;
 
@@ -31,16 +31,16 @@ public class DriveSystem extends Subsystem {
 
 		leftMaster.configNominalOutputForward(0, TIMEOUT);
 		leftMaster.configNominalOutputReverse(0, TIMEOUT);
-		leftMaster.configPeakOutputForward(1, TIMEOUT);
-		leftMaster.configPeakOutputReverse(-1, TIMEOUT);
+		leftMaster.configPeakOutputForward(0.5, TIMEOUT);
+		leftMaster.configPeakOutputReverse(-0.5, TIMEOUT);
 
 		rightMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, DEFAULT_PID_INDEX, TIMEOUT);
 		rightMaster.setSensorPhase(true);
 
 		rightMaster.configNominalOutputForward(0, TIMEOUT);
 		rightMaster.configNominalOutputReverse(0, TIMEOUT);
-		rightMaster.configPeakOutputForward(1, TIMEOUT);
-		rightMaster.configPeakOutputReverse(-1, TIMEOUT);
+		rightMaster.configPeakOutputForward(0.5, TIMEOUT);
+		rightMaster.configPeakOutputReverse(-0.5, TIMEOUT);
 
 		leftMaster.setInverted(true);
 		leftSlave.setInverted(true);
@@ -83,6 +83,13 @@ public class DriveSystem extends Subsystem {
 		leftSlave.set(ControlMode.Follower, RobotMap.MOTOR_LEFT_MASTER);
 		rightSlave.set(ControlMode.Follower, RobotMap.MOTOR_RIGHT_MASTER);
 	}
+	
+	public void drivePosition(int position) {
+		leftMaster.set(ControlMode.Position, position);
+		rightMaster.set(ControlMode.Position, position);
+		leftSlave.set(ControlMode.Follower, RobotMap.MOTOR_LEFT_MASTER);
+		rightSlave.set(ControlMode.Follower, RobotMap.MOTOR_RIGHT_MASTER);
+	}
 
 	public void initDefaultCommand() {
 		this.setDefaultCommand(new DriveCommand());
@@ -103,5 +110,18 @@ public class DriveSystem extends Subsystem {
 
 	public void turn(double v, double w) {
 		this.driveAction(v, w);
+	}
+	
+	public void setPosition(int position) {
+		leftMaster.setSelectedSensorPosition(position, DEFAULT_PID_INDEX, TIMEOUT);
+		rightMaster.setSelectedSensorPosition(position, DEFAULT_PID_INDEX, TIMEOUT);
+	}
+	
+	public int getLeftPosition() {
+		return leftMaster.getSelectedSensorPosition(DEFAULT_PID_INDEX);
+	}
+	
+	public int getRightPosition() {
+		return rightMaster.getSelectedSensorPosition(DEFAULT_PID_INDEX);
 	}
 }
