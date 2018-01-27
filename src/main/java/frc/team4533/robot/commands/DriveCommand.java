@@ -1,11 +1,9 @@
 package frc.team4533.robot.commands;
 
-import frc.team4533.robot.Robot;
-import frc.team4533.robot.RobotMap;
-import frc.team4533.robot.subsystems.DriveSystem;
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
+import frc.team4533.robot.RobotMap;
+import frc.team4533.robot.subsystems.DriveSystem;
 
 public class DriveCommand extends Command {
 
@@ -18,7 +16,7 @@ public class DriveCommand extends Command {
 	}
 
 	protected void execute() {
-		driveSystem.drivingControls(controller);
+		driveSystem.driveVelocity(controller.getY(), controller.getRawAxis(3));
 	}
 
 	protected boolean isFinished() {
