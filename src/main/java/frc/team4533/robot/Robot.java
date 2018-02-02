@@ -5,12 +5,16 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team4533.robot.commands.DriveDistance;
 import frc.team4533.robot.subsystems.DriveSystem;
+import frc.team4533.robot.subsystems.IntakeSystem;
+import frc.team4533.robot.subsystems.SwingArmSystem;
 
 public class Robot extends IterativeRobot {
 
 	public static DriveDistance autonomousCommand;
 	public void robotInit() {
 		DriveSystem.initialize();
+		IntakeSystem.initialize();
+		SwingArmSystem.initialize();
 		autonomousCommand = new DriveDistance(100);
 	}
 

@@ -5,18 +5,17 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.team4533.robot.RobotMap;
 import frc.team4533.robot.subsystems.SwingArmSystem;
 
-public class SwingArmCommand extends Command {
-	
-	private Joystick j;
-	private SwingArmSystem swingArmSystem;
-	
-	public SwingArmCommand() {
-		j = new Joystick(RobotMap.JOYSTICK_PORT);
-		swingArmSystem = SwingArmSystem.getInstance();
+public class SwingArmUp extends Command {
+
+
+	public SwingArmUp(){
+		requires(SwingArmSystem.getInstance());
 	}
-	
-	
-	
+
+	public void execute(){
+		SwingArmSystem.getInstance().up();
+	}
+
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub

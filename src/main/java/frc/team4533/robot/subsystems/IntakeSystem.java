@@ -5,19 +5,16 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team4533.robot.RobotMap;
-import frc.team4533.robot.commands.IntakeCommand;
 
 public class IntakeSystem extends Subsystem {
 	
 	private VictorSPX leftMotor;
 	private VictorSPX rightMotor;
 	private static IntakeSystem INSTANCE;
-	private IntakeCommand intakeCommand;
 	
 	public IntakeSystem() {
 		leftMotor = new VictorSPX(RobotMap.INTAKE_LEFT);
 		rightMotor = new VictorSPX(RobotMap.INTAKE_RIGHT);
-		intakeCommand = new IntakeCommand();
 	}
 	
 	public static void initialize() {
@@ -54,7 +51,6 @@ public class IntakeSystem extends Subsystem {
 	@Override
 	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub
-		this.setDefaultCommand(intakeCommand);
 	}
 
 }

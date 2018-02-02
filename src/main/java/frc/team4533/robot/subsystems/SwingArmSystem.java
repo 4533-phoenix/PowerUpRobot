@@ -4,14 +4,18 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.team4533.robot.RobotMap;
+import frc.team4533.robot.commands.SwingArmUp;
 
 public class SwingArmSystem extends Subsystem {
 	
 	private VictorSPX motor;
 	public static SwingArmSystem INSTANCE;
+	private SwingArmUp swingArmCommand;
 	
 	public SwingArmSystem() {
-		motor = new VictorSPX(4);
+		motor = new VictorSPX(RobotMap.SWING_ARM_MOTOR);
+		swingArmCommand=new SwingArmUp();
 	}
 	
 	public static void initialize() {
@@ -42,7 +46,8 @@ public class SwingArmSystem extends Subsystem {
 	}
 	@Override
 	protected void initDefaultCommand() {
-		
+
+		this.setDefaultCommand(swingArmCommand);
 		
 	}
 
