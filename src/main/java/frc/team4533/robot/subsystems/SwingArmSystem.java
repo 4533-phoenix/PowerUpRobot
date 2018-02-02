@@ -20,7 +20,7 @@ public class SwingArmSystem extends Subsystem {
 		}
 	}
 	
-	public SwingArmSystem getInstance() {
+	public static SwingArmSystem getInstance() {
 		return INSTANCE;
 	}
 	
@@ -42,7 +42,7 @@ public class SwingArmSystem extends Subsystem {
 	}
 	@Override
 	protected void initDefaultCommand() {
-		// TODO Auto-generated method stub
+		
 		
 	}
 

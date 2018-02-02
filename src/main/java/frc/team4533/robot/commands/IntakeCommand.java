@@ -19,7 +19,7 @@ public class IntakeCommand extends Command {
 		if(j.getRawButton(RobotMap.LEFT_TRIGGER)) {
 			intakeSystem.in();
 		}
-		if(j.getRawButtonPressed(RobotMap.RIGHT_TRIGGER)) {
+		if(j.getRawButtonPressed(RobotMap.LEFT_BUMPER)) {
 			intakeSystem.out();
 		}
 	}

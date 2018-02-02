@@ -36,7 +36,7 @@ public class Robot extends IterativeRobot {
 		if(autonomousCommand != null) {
 			autonomousCommand.cancel();
 		}
-		DriveSystem.getInstance().setPIDFValues(0.113333, 0, 0, .1097);
+		DriveSystem.getInstance().setPIDFValues(0.5, 0, 0, 0);
 	}
 
 	public void teleopPeriodic() {

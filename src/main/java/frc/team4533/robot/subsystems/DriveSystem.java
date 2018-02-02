@@ -34,16 +34,16 @@ public class DriveSystem extends Subsystem {
 
 		leftMaster.configNominalOutputForward(0, TIMEOUT);
 		leftMaster.configNominalOutputReverse(0, TIMEOUT);
-		leftMaster.configPeakOutputForward(0.5, TIMEOUT);
-		leftMaster.configPeakOutputReverse(-0.5, TIMEOUT);
+		leftMaster.configPeakOutputForward(1, TIMEOUT);
+		leftMaster.configPeakOutputReverse(-1, TIMEOUT);
 
 		rightMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, DEFAULT_PID_INDEX, TIMEOUT);
 		rightMaster.setSensorPhase(true);
 
 		rightMaster.configNominalOutputForward(0, TIMEOUT);
 		rightMaster.configNominalOutputReverse(0, TIMEOUT);
-		rightMaster.configPeakOutputForward(0.5, TIMEOUT);
-		rightMaster.configPeakOutputReverse(-0.5, TIMEOUT);
+		rightMaster.configPeakOutputForward(1, TIMEOUT);
+		rightMaster.configPeakOutputReverse(-1, TIMEOUT);
 
 		leftMaster.setInverted(true);
 		leftSlave.setInverted(true);
