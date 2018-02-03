@@ -16,10 +16,13 @@ public class DriveSystem extends Subsystem {
 	WPI_TalonSRX rightMaster;
 	WPI_TalonSRX rightSlave;
 	private static final int MAX_VELOCITY = 250;
-	private static final int UNITS_PER_REVOLUTION = 4096;
+	public static final int UNITS_PER_REVOLUTION = 4096;
 	private static final int TIMEOUT = 10;
 	private static final int DEFAULT_PID_INDEX = 0;
-
+	private double targetL = 0;
+	private double targetR = 0;
+	
+	
 	public DriveSystem() {
 		rightMaster = new WPI_TalonSRX(RobotMap.MOTOR_RIGHT_MASTER);
 		leftMaster = new WPI_TalonSRX(RobotMap.MOTOR_LEFT_MASTER);
@@ -76,10 +79,17 @@ public class DriveSystem extends Subsystem {
 	}
 
 	public void driveVelocity(double left, double right) {
-		double targetL = left * MAX_VELOCITY * UNITS_PER_REVOLUTION / 600;
-		double targetR = right * MAX_VELOCITY * UNITS_PER_REVOLUTION / 600;
+		targetL = left * MAX_VELOCITY * UNITS_PER_REVOLUTION / 600;
+		targetR = right * MAX_VELOCITY * UNITS_PER_REVOLUTION / 600;
 		leftMaster.set(ControlMode.Velocity, targetL);
 		rightMaster.set(ControlMode.Velocity, targetR);
+		leftSlave.set(ControlMode.Follower, RobotMap.MOTOR_LEFT_MASTER);
+		rightSlave.set(ControlMode.Follower, RobotMap.MOTOR_RIGHT_MASTER);
+	}
+	
+	public void drivePosition(int position) {
+		leftMaster.set(ControlMode.Position, position);
+		rightMaster.set(ControlMode.Position, position);
 		leftSlave.set(ControlMode.Follower, RobotMap.MOTOR_LEFT_MASTER);
 		rightSlave.set(ControlMode.Follower, RobotMap.MOTOR_RIGHT_MASTER);
 	}
@@ -103,5 +113,34 @@ public class DriveSystem extends Subsystem {
 
 	public void turn(double v, double w) {
 		this.driveAction(v, w);
+	}
+	
+	public void setPosition(int position) {
+		leftMaster.setSelectedSensorPosition(position, DEFAULT_PID_INDEX, TIMEOUT);
+		rightMaster.setSelectedSensorPosition(position, DEFAULT_PID_INDEX, TIMEOUT);
+	}
+	
+	public int getLeftPosition() {
+		return leftMaster.getSelectedSensorPosition(DEFAULT_PID_INDEX);
+	}
+	
+	public int getRightPosition() {
+		return rightMaster.getSelectedSensorPosition(DEFAULT_PID_INDEX);
+	}
+	
+	public double getLeftVelocity() {
+		return leftMaster.getSelectedSensorVelocity(DEFAULT_PID_INDEX);
+	}
+	
+	public double getRightVelocity() {
+		return rightMaster.getSelectedSensorVelocity(DEFAULT_PID_INDEX);
+	}
+	
+	public double getLTargetVelocity() {
+		return targetL;
+	}
+	
+	public double getRTargetVelocity() {
+		return targetR;
 	}
 }
