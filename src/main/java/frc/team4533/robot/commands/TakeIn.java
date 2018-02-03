@@ -14,6 +14,10 @@ public class TakeIn extends Command {
 		IntakeSystem.getInstance().in();
 	}
 
+	public void end() {
+		IntakeSystem.getInstance().stop();
+	}
+	
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub

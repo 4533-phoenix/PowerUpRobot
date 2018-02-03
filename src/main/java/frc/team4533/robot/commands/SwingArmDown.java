@@ -16,6 +16,10 @@ public class SwingArmDown extends Command {
 		SwingArmSystem.getInstance().down();
 	}
 
+	public void end() {
+		SwingArmSystem.getInstance().stop();
+	}
+	
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub

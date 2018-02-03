@@ -15,7 +15,10 @@ public class SwingArmUp extends Command {
 	public void execute(){
 		SwingArmSystem.getInstance().up();
 	}
-
+	
+	public void end() {
+		SwingArmSystem.getInstance().stop();
+	}
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
