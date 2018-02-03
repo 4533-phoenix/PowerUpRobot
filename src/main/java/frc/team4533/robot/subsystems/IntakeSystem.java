@@ -28,13 +28,13 @@ public class IntakeSystem extends Subsystem {
 	}
 	
 	public void in() {
-		leftMotor.set(ControlMode.PercentOutput, 1);
-		rightMotor.set(ControlMode.PercentOutput, 1);
+		leftMotor.set(ControlMode.PercentOutput, .5);
+		rightMotor.set(ControlMode.PercentOutput, .5);
 	}
 	
 	public void out() {
-		leftMotor.set(ControlMode.PercentOutput, -1);
-		rightMotor.set(ControlMode.PercentOutput, -1);
+		leftMotor.set(ControlMode.PercentOutput, -.5);
+		rightMotor.set(ControlMode.PercentOutput, -.5);
 	}
 	
 	public void stop() {

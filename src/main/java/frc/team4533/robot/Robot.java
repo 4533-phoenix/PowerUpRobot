@@ -11,15 +11,16 @@ import frc.team4533.robot.subsystems.SwingArmSystem;
 public class Robot extends IterativeRobot {
 
 	public static DriveDistance autonomousCommand;
+	
 	/**
 	 * Method is called when the robot is first turned on
 	 * Initializes all of the subsystems and OI.
 	*/
 	public void robotInit() {
-		OI.initialize();
 		DriveSystem.initialize();
 		IntakeSystem.initialize();
 		SwingArmSystem.initialize();
+		OI.initialize();
 		autonomousCommand = new DriveDistance(100);
 	}
 	/**

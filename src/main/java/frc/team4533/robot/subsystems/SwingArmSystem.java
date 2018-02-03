@@ -11,11 +11,9 @@ public class SwingArmSystem extends Subsystem {
 	
 	private VictorSPX motor;
 	public static SwingArmSystem INSTANCE;
-	private SwingArmUp swingArmCommand;
 	
 	public SwingArmSystem() {
 		motor = new VictorSPX(RobotMap.SWING_ARM_MOTOR);
-		swingArmCommand=new SwingArmUp();
 	}
 	
 	public static void initialize() {
@@ -29,11 +27,11 @@ public class SwingArmSystem extends Subsystem {
 	}
 	
 	public void up() {
-		motor.set(ControlMode.PercentOutput, 1);
+		motor.set(ControlMode.PercentOutput, .5);
 	}
 	
 	public void down() {
-		motor.set(ControlMode.PercentOutput, -1);
+		motor.set(ControlMode.PercentOutput, -.5);
 	}
 	
 	public void stop() {
@@ -47,7 +45,6 @@ public class SwingArmSystem extends Subsystem {
 	@Override
 	protected void initDefaultCommand() {
 
-		this.setDefaultCommand(swingArmCommand);
 		
 	}
 
