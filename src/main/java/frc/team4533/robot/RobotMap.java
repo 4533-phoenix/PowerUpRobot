@@ -113,4 +113,9 @@ public class RobotMap {
 	 * 
 	 */
 	public static int SWING_ARM_MOTOR = 5;
+	/**
+	 * This is the value for the swing arm potentiometer
+	 * 
+	 */
+	public static int SWING_ARM_POTENTIOMETER = 1;
 }

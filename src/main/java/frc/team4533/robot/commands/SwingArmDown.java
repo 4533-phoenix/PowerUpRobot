@@ -12,12 +12,21 @@ public class SwingArmDown extends Command {
 		requires(SwingArmSystem.getInstance());
 	}
 
-	public void execute(){
-		SwingArmSystem.getInstance().down();
+	protected void initialize() {
+		SwingArmSystem.getInstance().enable();
+	}
+	
+	public void execute() {
+		SwingArmSystem.getInstance().setAngle(20);
 	}
 
 	public void end() {
+		SwingArmSystem.getInstance().disable();
 		SwingArmSystem.getInstance().stop();
+	}
+	
+	public void interrupted() {
+		end();
 	}
 	
 	@Override

@@ -80,6 +80,9 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Right Velocity", DriveSystem.getInstance().getRightVelocity());
 		SmartDashboard.putNumber("Target L", DriveSystem.getInstance().getLTargetVelocity());
 		SmartDashboard.putNumber("Target R", DriveSystem.getInstance().getRTargetVelocity());
+		SmartDashboard.putNumber("Potentiometer", SwingArmSystem.getInstance().position());
+		SmartDashboard.putNumber("Potentiometer Angle", SwingArmSystem.getInstance().angle());
+		SmartDashboard.putData("Pid Stuff", SwingArmSystem.getInstance().getPIDController());
 	}
 	
 	

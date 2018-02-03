@@ -12,12 +12,21 @@ public class SwingArmUp extends Command {
 		requires(SwingArmSystem.getInstance());
 	}
 
+	protected void initialize() {
+		SwingArmSystem.getInstance().enable();
+	}
+	
 	public void execute(){
-		SwingArmSystem.getInstance().up();
+		SwingArmSystem.getInstance().setAngle(40);
 	}
 	
 	public void end() {
+		SwingArmSystem.getInstance().disable();
 		SwingArmSystem.getInstance().stop();
+	}
+	
+	public void interrupted() {
+		end();
 	}
 	@Override
 	protected boolean isFinished() {
