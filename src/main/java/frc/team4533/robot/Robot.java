@@ -12,6 +12,7 @@ public class Robot extends IterativeRobot {
 
 	public static DriveDistance autonomousCommand;
 	public void robotInit() {
+		OI.initialize();
 		DriveSystem.initialize();
 		IntakeSystem.initialize();
 		SwingArmSystem.initialize();
