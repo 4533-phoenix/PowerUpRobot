@@ -22,7 +22,7 @@ public class OI {
 		intakeIn.whileHeld(new TakeIn());
 		intakeOut.whileHeld(new PushOut());
 		armUp.whenPressed(new MoveSwingArm(45));
-		armDown.whenPressed(new SwingArmDown());
+		armDown.whenPressed(new MoveSwingArm(5));
 	}
 	public static OI getInstance() {
 		return INSTANCE;
