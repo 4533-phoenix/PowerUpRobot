@@ -21,8 +21,8 @@ public class OI {
 		SwingArmSystem.initialize();
 		intakeIn.whileHeld(new TakeIn());
 		intakeOut.whileHeld(new PushOut());
-		armUp.whileHeld(new SwingArmUp());
-		armDown.whileHeld(new SwingArmDown());
+		armUp.whenPressed(new SwingArmUp());
+		armDown.whenPressed(new SwingArmDown());
 	}
 	public static OI getInstance() {
 		return INSTANCE;

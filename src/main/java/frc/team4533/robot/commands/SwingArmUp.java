@@ -17,7 +17,7 @@ public class SwingArmUp extends Command {
 	}
 	
 	public void execute(){
-		SwingArmSystem.getInstance().setAngle(40);
+		SwingArmSystem.getInstance().setAngle(45);
 	}
 	
 	public void end() {

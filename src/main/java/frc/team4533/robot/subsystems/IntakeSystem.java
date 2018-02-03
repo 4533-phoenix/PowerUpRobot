@@ -15,6 +15,7 @@ public class IntakeSystem extends Subsystem {
 	public IntakeSystem() {
 		leftMotor = new VictorSPX(RobotMap.INTAKE_LEFT);
 		rightMotor = new VictorSPX(RobotMap.INTAKE_RIGHT);
+		rightMotor.setInverted(true);
 	}
 	
 	public static void initialize() {
@@ -28,13 +29,13 @@ public class IntakeSystem extends Subsystem {
 	}
 	
 	public void in() {
-		leftMotor.set(ControlMode.PercentOutput, .5);
-		rightMotor.set(ControlMode.PercentOutput, .5);
+		leftMotor.set(ControlMode.PercentOutput, -.5);
+		rightMotor.set(ControlMode.PercentOutput, -.5);
 	}
 	
 	public void out() {
-		leftMotor.set(ControlMode.PercentOutput, -.5);
-		rightMotor.set(ControlMode.PercentOutput, -.5);
+		leftMotor.set(ControlMode.PercentOutput, 1);
+		rightMotor.set(ControlMode.PercentOutput, 1);
 	}
 	
 	public void stop() {
