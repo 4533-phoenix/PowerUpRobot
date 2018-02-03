@@ -2,10 +2,10 @@ package frc.team4533.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.team4533.robot.commands.TakeIn;
+import frc.team4533.robot.commands.MoveSwingArm;
 import frc.team4533.robot.commands.PushOut;
-import frc.team4533.robot.commands.SwingArmUp;
 import frc.team4533.robot.commands.SwingArmDown;
+import frc.team4533.robot.commands.TakeIn;
 import frc.team4533.robot.subsystems.IntakeSystem;
 import frc.team4533.robot.subsystems.SwingArmSystem;
 
@@ -21,7 +21,7 @@ public class OI {
 		SwingArmSystem.initialize();
 		intakeIn.whileHeld(new TakeIn());
 		intakeOut.whileHeld(new PushOut());
-		armUp.whenPressed(new SwingArmUp());
+		armUp.whenPressed(new MoveSwingArm(45));
 		armDown.whenPressed(new SwingArmDown());
 	}
 	public static OI getInstance() {
