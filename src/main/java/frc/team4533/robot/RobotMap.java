@@ -118,4 +118,14 @@ public class RobotMap {
 	 * 
 	 */
 	public static int SWING_ARM_POTENTIOMETER = 1;
+	
+	//PID MODES
+	
+	/**
+	 * This value determines if we are in PID in driving mode or not
+	 */
+	
+	public static boolean PID_DRIVE_MODE = true;
+	
+	
 }

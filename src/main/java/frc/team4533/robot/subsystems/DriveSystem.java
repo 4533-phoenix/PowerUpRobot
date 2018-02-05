@@ -9,18 +9,42 @@ import frc.team4533.robot.RobotMap;
 import frc.team4533.robot.commands.DriveCommand;
 
 public class DriveSystem extends Subsystem {
-
+	/**
+	 * An instance of DriveSystem
+	 */
 	private static DriveSystem INSTANCE;
+	/**
+	 * The left master motor controler
+	 */
 	WPI_TalonSRX leftMaster;
+	/**
+	 * The left slave motor controler
+	 */
 	WPI_TalonSRX leftSlave;
+	/**
+	 * The right master motor controler
+	 */
 	WPI_TalonSRX rightMaster;
+	/**
+	 * The right slave motor controler
+	 */
 	WPI_TalonSRX rightSlave;
-	private static final int MAX_VELOCITY = 250;
+	/**
+	 * The maximum velocity we want our robot to go (RPM)
+	 */
+	private static final int MAX_VELOCITY = 550;
+	/**
+	 * How many units there are on the magnetic encoder
+	 */
 	public static final int UNITS_PER_REVOLUTION = 4096;
+	/**
+	 * 
+	 */
 	private static final int TIMEOUT = 10;
 	private static final int DEFAULT_PID_INDEX = 0;
 	private double targetL = 0;
 	private double targetR = 0;
+	private int printCounter = 0;
 	
 	
 	public DriveSystem() {
@@ -44,7 +68,10 @@ public class DriveSystem extends Subsystem {
 		rightMaster.configNominalOutputReverse(0, TIMEOUT);
 		rightMaster.configPeakOutputForward(1, TIMEOUT);
 		rightMaster.configPeakOutputReverse(-1, TIMEOUT);
-
+		
+		leftMaster.configAllowableClosedloopError(DEFAULT_PID_INDEX, 50, TIMEOUT);
+		rightMaster.configAllowableClosedloopError(DEFAULT_PID_INDEX, 50, TIMEOUT);
+		
 		leftMaster.setInverted(true);
 		leftSlave.setInverted(true);
 	}
@@ -85,6 +112,18 @@ public class DriveSystem extends Subsystem {
 		rightMaster.set(ControlMode.Velocity, targetR);
 		leftSlave.set(ControlMode.Follower, RobotMap.MOTOR_LEFT_MASTER);
 		rightSlave.set(ControlMode.Follower, RobotMap.MOTOR_RIGHT_MASTER);
+		if(printCounter == 50) {
+			System.out.println("Out: " + leftMaster.getMotorOutputVoltage()/leftMaster.getBusVoltage()
+					+ "\tSpd: " + leftMaster.getSelectedSensorVelocity(DEFAULT_PID_INDEX)
+					+ "\tErr: " + leftMaster.getClosedLoopError(DEFAULT_PID_INDEX)
+					+ "\tTrg: " + targetL
+					+ "\tOut: " + rightMaster.getMotorOutputVoltage()/rightMaster.getBusVoltage()
+					+ "\tSpd: " + rightMaster.getSelectedSensorVelocity(DEFAULT_PID_INDEX)
+					+ "\tErr: " + rightMaster.getClosedLoopError(DEFAULT_PID_INDEX)
+					+ "\tTrg: " + targetR);
+			printCounter = 0;
+		}
+		printCounter++;
 	}
 	
 	public void drivePosition(int position) {

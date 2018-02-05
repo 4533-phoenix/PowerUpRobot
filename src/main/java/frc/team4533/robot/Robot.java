@@ -67,7 +67,14 @@ public class Robot extends IterativeRobot {
 		if(autonomousCommand != null) {
 			autonomousCommand.cancel();
 		}
-		DriveSystem.getInstance().setPIDFValues(0.5, 0, 0, 0);
+		// F-Gain = ( 100% * 1023 ) / MagneticEncoderVelocity
+		//   MagneticEncoderVelocity determinted from TalonSRX self-test
+		// f = 1023 / 3168 = 0.323
+		if(RobotMap.PID_DRIVE_MODE) {
+			DriveSystem.getInstance().setPIDFValues(.25, 0, 0, 0.243);	
+		}
+		
+		
 	}
 	/**
 	 * 

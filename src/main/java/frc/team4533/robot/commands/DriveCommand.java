@@ -16,7 +16,12 @@ public class DriveCommand extends Command {
 	}
 
 	protected void execute() {
-		driveSystem.driveVelocity(controller.getY(), controller.getRawAxis(3));
+		if(RobotMap.PID_DRIVE_MODE) {
+			driveSystem.driveVelocity(controller.getY(), controller.getRawAxis(3));
+		}
+		else {
+			driveSystem.driveAction(controller.getY(), controller.getRawAxis(3));
+		}
 	}
 
 	protected boolean isFinished() {
