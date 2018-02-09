@@ -12,10 +12,14 @@ import frc.team4533.robot.subsystems.SwingArmSystem;
 public class OI {
 	Joystick j = new Joystick(RobotMap.JOYSTICK_PORT);
 	private static OI INSTANCE;
-	JoystickButton intakeIn=new JoystickButton(j,RobotMap.LEFT_BUMPER);
-	JoystickButton intakeOut=new JoystickButton(j,RobotMap.LEFT_TRIGGER);
-	JoystickButton armUp=new JoystickButton(j,RobotMap.RIGHT_BUMPER);
-	JoystickButton armDown=new JoystickButton(j,RobotMap.RIGHT_TRIGGER);
+	private JoystickButton intakeIn = new JoystickButton(j, RobotMap.LEFT_BUMPER);
+	private JoystickButton intakeOut = new JoystickButton(j, RobotMap.LEFT_TRIGGER);
+	private JoystickButton armUp = new JoystickButton(j, RobotMap.RIGHT_BUMPER);
+	private JoystickButton armDown = new JoystickButton(j, RobotMap.RIGHT_TRIGGER);
+	
+	/**
+	 * Creates the controls for the robots
+	 */
 	public OI(){
 		IntakeSystem.initialize();
 		SwingArmSystem.initialize();
@@ -24,11 +28,17 @@ public class OI {
 		armUp.whenPressed(new MoveSwingArm(45));
 		armDown.whenPressed(new MoveSwingArm(5));
 	}
+	/**
+	 * @return Instance: An instance of OI
+	 */
 	public static OI getInstance() {
 		return INSTANCE;
 	}
+	/**
+	 * Initializes OI
+	 */
 	public static void initialize() {
-		if(INSTANCE == null) {
+		if (INSTANCE == null) {
 			INSTANCE = new OI();
 		}
 	}

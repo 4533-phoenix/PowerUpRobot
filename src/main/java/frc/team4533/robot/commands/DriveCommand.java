@@ -9,18 +9,34 @@ public class DriveCommand extends Command {
 
 	private Joystick controller;
 	private DriveSystem driveSystem = DriveSystem.getInstance();
-
+	
 	public DriveCommand() {
 		controller = new Joystick(RobotMap.JOYSTICK_PORT);
 		requires(DriveSystem.getInstance());
 	}
-
+	/**
+	 * Runs every 20? MS. Runs DriveSystem.DriveVelocity() or DriveSystem.DriveAction() based of the value of RobotMap.PID_DRIVE_MODE.
+	 * DriveVelocity is called when PID_DRIVE_MODE is true. Sets up a dead zone for the controller. Calls DriveSystem.setVelocity(500) when the Joystick buttons are pressed and DriveVelocity(250) when not pressed.
+	 */
 	protected void execute() {
-		if(RobotMap.PID_DRIVE_MODE) {
-			driveSystem.driveVelocity(controller.getY(), controller.getRawAxis(3));
+		double leftStick = controller.getY();
+		double rightStick = controller.getRawAxis(3);
+		if(controller.getRawButton(RobotMap.LEFT_STICK_BUTTON)|| controller.getRawButton(RobotMap.RIGHT_STICK_BUTTON)) {
+			driveSystem.setVelocity(500);
 		}
 		else {
-			driveSystem.driveAction(controller.getY(), controller.getRawAxis(3));
+			driveSystem.setVelocity(250);
+		}
+		if (Math.abs(rightStick) <= .1) {
+			rightStick = 0;
+		}
+		if (Math.abs(leftStick) <= .1) {
+			leftStick = 0;
+		}
+		if (RobotMap.PID_DRIVE_MODE) {
+			driveSystem.driveVelocity(leftStick, rightStick);
+		} else {
+			driveSystem.driveAction(leftStick, rightStick);
 		}
 	}
 

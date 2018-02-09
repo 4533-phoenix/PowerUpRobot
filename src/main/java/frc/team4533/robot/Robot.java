@@ -61,7 +61,9 @@ public class Robot extends IterativeRobot {
 	/**
 	 * What is called at the beginning of the Teleop Period
 	 * 
-	 * 
+	 *  F-Gain = ( 100% * 1023 ) / MagneticEncoderVelocity
+		MagneticEncoderVelocity determinted from TalonSRX self-test
+	 	f = 1023 / 3168 = 0.323
 	 */
 	public void teleopInit() {
 		if(autonomousCommand != null) {
@@ -71,7 +73,7 @@ public class Robot extends IterativeRobot {
 		//   MagneticEncoderVelocity determinted from TalonSRX self-test
 		// f = 1023 / 3168 = 0.323
 		if(RobotMap.PID_DRIVE_MODE) {
-			DriveSystem.getInstance().setPIDFValues(.25, 0, 0, 0.243);	
+			DriveSystem.getInstance().setPIDFValues(.25, 0, 7.5, 0.243);
 		}
 		
 		
