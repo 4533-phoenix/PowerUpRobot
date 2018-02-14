@@ -21,16 +21,16 @@ public class DriveCommand extends Command {
 	protected void execute() {
 		double leftStick = controller.getY();
 		double rightStick = controller.getRawAxis(3);
-		if(controller.getRawButton(RobotMap.LEFT_STICK_BUTTON)|| controller.getRawButton(RobotMap.RIGHT_STICK_BUTTON)) {
+		if(controller.getRawButton(RobotMap.RIGHT_BUMPER)|| controller.getRawButton(RobotMap.RIGHT_TRIGGER)) {
 			driveSystem.setVelocity(500);
 		}
 		else {
 			driveSystem.setVelocity(250);
 		}
-		if (Math.abs(rightStick) <= .1) {
+		if (Math.abs(rightStick) <= .05) {
 			rightStick = 0;
 		}
-		if (Math.abs(leftStick) <= .1) {
+		if (Math.abs(leftStick) <= .05) {
 			leftStick = 0;
 		}
 		if (RobotMap.PID_DRIVE_MODE) {

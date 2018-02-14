@@ -3,7 +3,10 @@ package frc.team4533.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team4533.robot.RobotMap;
 import frc.team4533.robot.commands.DriveCommand;
@@ -57,6 +60,10 @@ public class DriveSystem extends Subsystem {
 	 * A counter used to determine when to print to riolog
 	 */
 	private int printCounter = 0;
+	
+	private Port navXPort;
+	
+	private AHRS navX;
 	/**
 	 * Sets up motor controllers and the encoders on them
 	 */
@@ -87,7 +94,10 @@ public class DriveSystem extends Subsystem {
 
 		leftMaster.setInverted(true);
 		leftSlave.setInverted(true);
+		navXPort = SPI.Port.kMXP;
+		navX = new AHRS(navXPort);
 	}
+
 	/**
 	 * Creates a new instance of DriveSystem
 	 */
@@ -96,19 +106,27 @@ public class DriveSystem extends Subsystem {
 			INSTANCE = new DriveSystem();
 		}
 	}
+
 	/**
 	 * Gets an instance of the DriveSystem
+	 * 
 	 * @return INSTANCE which is a DriveSystem object
 	 */
 	public static DriveSystem getInstance() {
 		return INSTANCE;
 	}
+
 	/**
 	 * Sets the motor controllers to follow specific PIDF loop
-	 * @param p Proportional Gain
-	 * @param i Integral Gain
-	 * @param d Derivative Gain
-	 * @param f Feed-forward Gain
+	 * 
+	 * @param p
+	 *            Proportional Gain
+	 * @param i
+	 *            Integral Gain
+	 * @param d
+	 *            Derivative Gain
+	 * @param f
+	 *            Feed-forward Gain
 	 */
 	public void setPIDFValues(double p, double i, double d, double f) {
 		leftMaster.config_kF(DEFAULT_PID_INDEX, f, TIMEOUT);
@@ -120,10 +138,16 @@ public class DriveSystem extends Subsystem {
 		rightMaster.config_kI(DEFAULT_PID_INDEX, i, TIMEOUT);
 		rightMaster.config_kD(DEFAULT_PID_INDEX, d, TIMEOUT);
 	}
+
 	/**
 	 * Sets the motor controllers to run using the percent output mode
-	 * @param left A value between -1 and 1. Typically a value from the controller's left joystick is passed here
-	 * @param right A value between -1 and 1. Typically a value from the controller's right joystick is passed here
+	 * 
+	 * @param left
+	 *            A value between -1 and 1. Typically a value from the
+	 *            controller's left joystick is passed here
+	 * @param right
+	 *            A value between -1 and 1. Typically a value from the
+	 *            controller's right joystick is passed here
 	 */
 	public void driveAction(double left, double right) {
 		// This method used to actually drive the robot
@@ -132,10 +156,17 @@ public class DriveSystem extends Subsystem {
 		this.leftSlave.set(ControlMode.Follower, RobotMap.MOTOR_LEFT_MASTER);
 		this.rightSlave.set(ControlMode.Follower, RobotMap.MOTOR_RIGHT_MASTER);
 	}
+
 	/**
-	 * Sets the motor controllers to run using the velocity output mode. Left and Right parameters are used as scaling factors.
-	 * @param left A value between -1 and 1. Typically a value from the controller's left joystick is passed here
-	 * @param right A value between -1 and 1. Typically a value from the controller's right joystick is passed here
+	 * Sets the motor controllers to run using the velocity output mode. Left
+	 * and Right parameters are used as scaling factors.
+	 * 
+	 * @param left
+	 *            A value between -1 and 1. Typically a value from the
+	 *            controller's left joystick is passed here
+	 * @param right
+	 *            A value between -1 and 1. Typically a value from the
+	 *            controller's right joystick is passed here
 	 */
 	public void driveVelocity(double left, double right) {
 		targetL = left * MAX_VELOCITY * UNITS_PER_REVOLUTION / 600;
@@ -155,9 +186,12 @@ public class DriveSystem extends Subsystem {
 		}
 		printCounter++;
 	}
+
 	/**
 	 * Sets the motor controllers to run using position mode
-	 * @param position The position value that the encoder will be set to go to
+	 * 
+	 * @param position
+	 *            The position value that the encoder will be set to go to
 	 */
 	public void drivePosition(int position) {
 		leftMaster.set(ControlMode.Position, position);
@@ -165,96 +199,132 @@ public class DriveSystem extends Subsystem {
 		leftSlave.set(ControlMode.Follower, RobotMap.MOTOR_LEFT_MASTER);
 		rightSlave.set(ControlMode.Follower, RobotMap.MOTOR_RIGHT_MASTER);
 	}
+
 	/**
 	 * Sets the default command for the method
 	 */
 	public void initDefaultCommand() {
 		this.setDefaultCommand(new DriveCommand());
 	}
+
 	// Just some methods we can use in autonomous
 	/**
 	 * Moves the robot forward.
-	 * @param v A value between -1 and 1
+	 * 
+	 * @param v
+	 *            A value between -1 and 1
 	 */
 	public void forward(double v) {
 		this.driveAction(v, v);
 	}
+
 	/**
 	 * Moves the robot backward.
-	 * @param v A value between -1 and 1
+	 * 
+	 * @param v
+	 *            A value between -1 and 1
 	 */
 	public void backward(double v) {
 		this.driveAction(-v, -v);
 	}
+
 	/**
 	 * Stops the robot.
 	 */
 	public void stop() {
 		this.driveAction(0.0, 0.0);
 	}
+
 	/**
 	 * Turns the robot.
-	 * @param v A value between -1 and 1 sent to the left motor controller
-	 * @param w A value between -1 and 1 sent to the right motor controller
+	 * 
+	 * @param v
+	 *            A value between -1 and 1 sent to the left motor controller
+	 * @param w
+	 *            A value between -1 and 1 sent to the right motor controller
 	 */
 	public void turn(double v, double w) {
 		this.driveAction(v, w);
 	}
+
 	/**
 	 * Sets the position on the encoder without moving the wheels.
-	 * @param position The position the encoder will be set to.
+	 * 
+	 * @param position
+	 *            The position the encoder will be set to.
 	 */
 	public void setPosition(int position) {
 		leftMaster.setSelectedSensorPosition(position, DEFAULT_PID_INDEX, TIMEOUT);
 		rightMaster.setSelectedSensorPosition(position, DEFAULT_PID_INDEX, TIMEOUT);
 	}
+
 	/**
 	 * Returns the left wheels position based on the left encoder.
+	 * 
 	 * @return The left wheels position
 	 */
 	public int getLeftPosition() {
 		return leftMaster.getSelectedSensorPosition(DEFAULT_PID_INDEX);
 	}
+
 	/**
 	 * Returns the right wheels position based on the right encoder.
+	 * 
 	 * @return The right wheels position
 	 */
 	public int getRightPosition() {
 		return rightMaster.getSelectedSensorPosition(DEFAULT_PID_INDEX);
 	}
+
 	/**
 	 * Returns the current velocity of the left wheels
+	 * 
 	 * @return The left wheels velocity
 	 */
 	public double getLeftVelocity() {
 		return leftMaster.getSelectedSensorVelocity(DEFAULT_PID_INDEX);
 	}
+
 	/**
 	 * Returns the current velocity of the right wheels
+	 * 
 	 * @return The right wheels velocity
 	 */
 	public double getRightVelocity() {
 		return rightMaster.getSelectedSensorVelocity(DEFAULT_PID_INDEX);
 	}
+
 	/**
 	 * Returns the left target velocity
+	 * 
 	 * @return The left target velocity
 	 */
 	public double getLTargetVelocity() {
 		return targetL;
 	}
+
 	/**
 	 * Returns the right target velocity
+	 * 
 	 * @return The right target velocity
 	 */
 	public double getRTargetVelocity() {
 		return targetR;
 	}
+
 	/**
 	 * Sets the RPM the robot will move at
-	 * @param RPM The rotations per minute the robot will move at
+	 * 
+	 * @param RPM
+	 *            The rotations per minute the robot will move at
 	 */
 	public void setVelocity(int RPM) {
 		MAX_VELOCITY = RPM;
+	}
+	public double getAngle() {
+		return navX.getAngle();
+	}
+	public void resetAngle() {
+		navX.reset();
 	}
 }

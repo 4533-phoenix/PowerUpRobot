@@ -3,6 +3,7 @@ package frc.team4533.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team4533.robot.RobotMap;
 
@@ -11,6 +12,7 @@ public class IntakeSystem extends Subsystem {
 	private VictorSPX leftMotor;
 	private VictorSPX rightMotor;
 	private static IntakeSystem INSTANCE;
+	private AnalogInput boxSensor;
 	
 	/**
 	 * Sets up the motors for intake
@@ -19,6 +21,7 @@ public class IntakeSystem extends Subsystem {
 		leftMotor = new VictorSPX(RobotMap.INTAKE_LEFT);
 		rightMotor = new VictorSPX(RobotMap.INTAKE_RIGHT);
 		rightMotor.setInverted(true);
+		boxSensor = new AnalogInput(RobotMap.INTAKE_BOX_SENSOR);
 	}
 	
 	/**
@@ -47,8 +50,8 @@ public class IntakeSystem extends Subsystem {
 	 * Sets the motors to push the cube out
 	 */
 	public void out() {
-		leftMotor.set(ControlMode.PercentOutput, 1);
-		rightMotor.set(ControlMode.PercentOutput, 1);
+		leftMotor.set(ControlMode.PercentOutput, .75);
+		rightMotor.set(ControlMode.PercentOutput, .75);
 	}
 	/**
 	 * Stops the motors
@@ -62,9 +65,9 @@ public class IntakeSystem extends Subsystem {
 	 * @return False because we have no sensor on the intake yet
 	 */
 	public boolean hasCube() {
-		//if(proximitySensor detects cube) {
-		//	return true;
-		//}
+		if(boxSensor.getValue() == 0) {
+			return true;
+		}
 		return false;
 	}
 	@Override

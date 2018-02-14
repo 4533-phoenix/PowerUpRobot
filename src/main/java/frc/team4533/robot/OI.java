@@ -14,8 +14,10 @@ public class OI {
 	private static OI INSTANCE;
 	private JoystickButton intakeIn = new JoystickButton(j, RobotMap.LEFT_BUMPER);
 	private JoystickButton intakeOut = new JoystickButton(j, RobotMap.LEFT_TRIGGER);
-	private JoystickButton armUp = new JoystickButton(j, RobotMap.RIGHT_BUMPER);
-	private JoystickButton armDown = new JoystickButton(j, RobotMap.RIGHT_TRIGGER);
+	private JoystickButton arm55 = new JoystickButton(j, RobotMap.Y_BUTTON);
+	private JoystickButton arm10 = new JoystickButton(j, RobotMap.X_BUTTON);
+	private JoystickButton arm20 = new JoystickButton(j, RobotMap.B_BUTTON);
+	private JoystickButton arm5 = new JoystickButton(j, RobotMap.A_BUTTON);
 	
 	/**
 	 * Creates the controls for the robots
@@ -25,8 +27,11 @@ public class OI {
 		SwingArmSystem.initialize();
 		intakeIn.whileHeld(new TakeIn());
 		intakeOut.whileHeld(new PushOut());
-		armUp.whenPressed(new MoveSwingArm(45));
-		armDown.whenPressed(new MoveSwingArm(5));
+		arm55.whenPressed(new MoveSwingArm(55));
+		//When intake detected move to 10
+		arm5.whenPressed(new MoveSwingArm(5));
+		arm10.whenPressed(new MoveSwingArm(10));
+		arm20.whenPressed(new MoveSwingArm(20));
 	}
 	/**
 	 * @return Instance: An instance of OI

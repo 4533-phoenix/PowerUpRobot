@@ -16,12 +16,18 @@ public class DriveDistance extends Command {
 	}
 	
 	public void execute() {
+		DriveSystem.getInstance().setPIDFValues(0.1, 0.0001, 0, 0);
 		driveSystem.drivePosition((int)(-distance));
 	}
 	
 	@Override
 	protected boolean isFinished() {
-		return (driveSystem.getLeftPosition() >= distance) && (driveSystem.getRightPosition() >= distance);
+		return (Math.abs(driveSystem.getLeftPosition()) >= distance) && (Math.abs(driveSystem.getRightPosition()) >= distance);
+	}
+	
+	public void end() {
+		driveSystem.setPosition(0);
+		driveSystem.stop();
 	}
 
 }

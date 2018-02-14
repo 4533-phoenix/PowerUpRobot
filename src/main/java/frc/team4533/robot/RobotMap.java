@@ -119,6 +119,10 @@ public class RobotMap {
 	 */
 	public static int SWING_ARM_POTENTIOMETER = 1;
 	
+	/**
+	 * This is the value for the intake box sensor
+	 */
+	public static int INTAKE_BOX_SENSOR = 2;
 	//PID MODES
 	
 	/**
