@@ -39,7 +39,7 @@ public class Autonomous extends CommandGroup {
 			}
 			// Releases the cube
 			// this.addSequential(new MoveSwingArm(40));
-			//this.addSequential(new PushOut());
+			this.addSequential(new PushOut());
 		}
 
 		// The other times that we are not lined up
@@ -76,7 +76,7 @@ public class Autonomous extends CommandGroup {
 			}
 			// Releases the cube
 			// this.addSequential(new MoveSwingArm(40));
-			//this.addSequential(new PushOut());
+			this.addSequential(new PushOut());
 			}
 	}
 }
