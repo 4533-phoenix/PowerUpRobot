@@ -2,7 +2,11 @@ package frc.team4533.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.team4533.robot.subsystems.IntakeSystem;
-
+/**
+ * Intakes the cube.
+ * @author 4533 Programming Team
+ *
+ */
 public class TakeIn extends Command {
 
 

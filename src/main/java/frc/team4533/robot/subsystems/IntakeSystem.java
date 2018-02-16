@@ -6,7 +6,11 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team4533.robot.RobotMap;
-
+/**
+ * The system that allows the robot to intake cubes and shoot them out
+ * @author 4533 Programming Team
+ *
+ */
 public class IntakeSystem extends Subsystem {
 	
 	private VictorSPX leftMotor;

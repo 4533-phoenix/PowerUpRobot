@@ -9,7 +9,11 @@ import frc.team4533.robot.commands.Autonomous;
 import frc.team4533.robot.subsystems.DriveSystem;
 import frc.team4533.robot.subsystems.IntakeSystem;
 import frc.team4533.robot.subsystems.SwingArmSystem;
-
+/**
+ * The class that the robot runs through. It is the closest thing to a main method the program has.
+ * @author 4533 Programming Team
+ *
+ */
 public class Robot extends IterativeRobot {
 
 	public static Autonomous autonomousCommand;
@@ -55,11 +59,13 @@ public class Robot extends IterativeRobot {
 	 */
 	
 	public void autonomousInit() {
+		DriveSystem.getInstance().setPeakOutput(.5);
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		DriveSystem.getInstance().resetAngle();
 		autonomousCommand = new Autonomous(gameData, positionChooser.getSelected());
 		DriveSystem.getInstance().setPIDFValues(0.1, 0.0001, 0, 0);
 		DriveSystem.getInstance().setPosition(0);
+		
 		autonomousCommand.start();
 	}
 
@@ -73,6 +79,8 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Left Position", DriveSystem.getInstance().getLeftPosition());
 		SmartDashboard.putNumber("Right Position", DriveSystem.getInstance().getRightPosition());
 		System.out.println(DriveSystem.getInstance().getAngle());
+		SmartDashboard.putNumber("Left Velocity", DriveSystem.getInstance().getLeftVelocity());
+		SmartDashboard.putNumber("Right Velocity", DriveSystem.getInstance().getRightVelocity());
 	}
 
 	/**
@@ -93,6 +101,7 @@ public class Robot extends IterativeRobot {
 			//Was at P=.25 before i changed it
 			DriveSystem.getInstance().setPIDFValues(.15, 0, 2.5, 0.243);
 		}
+		DriveSystem.getInstance().setPeakOutput(1);
 		
 		
 	}

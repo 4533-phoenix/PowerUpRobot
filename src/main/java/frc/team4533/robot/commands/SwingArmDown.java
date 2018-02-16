@@ -4,7 +4,11 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.team4533.robot.RobotMap;
 import frc.team4533.robot.subsystems.SwingArmSystem;
-
+/**
+ * Moves the swing arm down.
+ * @author 4533 Programming Team
+ *
+ */
 public class SwingArmDown extends Command {
 
 

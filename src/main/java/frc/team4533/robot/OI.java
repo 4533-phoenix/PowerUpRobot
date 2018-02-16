@@ -8,7 +8,11 @@ import frc.team4533.robot.commands.SwingArmDown;
 import frc.team4533.robot.commands.TakeIn;
 import frc.team4533.robot.subsystems.IntakeSystem;
 import frc.team4533.robot.subsystems.SwingArmSystem;
-
+/**
+ * The place where buttons are mapped to commands
+ * @author 4533 Programming Team
+ *
+ */
 public class OI {
 	Joystick j = new Joystick(RobotMap.JOYSTICK_PORT);
 	private static OI INSTANCE;

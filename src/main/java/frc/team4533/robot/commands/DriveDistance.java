@@ -2,7 +2,11 @@ package frc.team4533.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.team4533.robot.subsystems.DriveSystem;
-
+/**
+ * The command that makes the robot drive to a certain distance
+ * @author 4533 Programming Team
+ *
+ */
 public class DriveDistance extends Command {
 	
 	private DriveSystem driveSystem = DriveSystem.getInstance();
@@ -13,6 +17,7 @@ public class DriveDistance extends Command {
 	public DriveDistance(double distance) {
 		this.requires(driveSystem);
 		this.distance = distance * UNITS_PER_INCH;
+		DriveSystem.getInstance().setPeakOutput(.3);
 	}
 	
 	public void execute() {

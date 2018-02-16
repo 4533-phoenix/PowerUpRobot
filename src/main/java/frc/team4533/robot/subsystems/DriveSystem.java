@@ -10,7 +10,11 @@ import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team4533.robot.RobotMap;
 import frc.team4533.robot.commands.DriveCommand;
-
+/**
+ * The system that allows the robot move in a direction.
+ * @author 4533 Programming Team
+ *
+ */
 public class DriveSystem extends Subsystem {
 	/**
 	 * An instance of DriveSystem
@@ -326,5 +330,11 @@ public class DriveSystem extends Subsystem {
 	}
 	public void resetAngle() {
 		navX.reset();
+	}
+	public void setPeakOutput(double output) {
+		rightMaster.configPeakOutputForward(output, TIMEOUT);
+		leftMaster.configPeakOutputForward(output, TIMEOUT);
+		leftMaster.configPeakOutputReverse(-output, TIMEOUT);
+		rightMaster.configPeakOutputReverse(-output, TIMEOUT);
 	}
 }

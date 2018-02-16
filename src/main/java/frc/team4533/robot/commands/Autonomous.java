@@ -2,7 +2,11 @@ package frc.team4533.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.team4533.robot.Robot;
-
+/**
+ * The autonomous command that the robot will run. 
+ * @author 4533 Programming Team
+ *
+ */
 public class Autonomous extends CommandGroup {
 
 	private String gameData;

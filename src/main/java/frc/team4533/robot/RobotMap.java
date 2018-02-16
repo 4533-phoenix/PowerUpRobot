@@ -1,5 +1,9 @@
 package frc.team4533.robot;
-
+/**
+ * A place for all of the static values used on the robot
+ * @author 4533 Programming Team
+ *
+ */
 public class RobotMap {
 
 	// Controller Mappings
