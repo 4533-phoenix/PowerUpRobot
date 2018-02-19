@@ -100,6 +100,9 @@ public class DriveSystem extends Subsystem {
 		leftSlave.setInverted(true);
 		navXPort = SPI.Port.kMXP;
 		navX = new AHRS(navXPort);
+
+		leftMaster.configClosedloopRamp(.5, TIMEOUT);
+		rightMaster.configClosedloopRamp(.5, TIMEOUT);
 	}
 
 	/**

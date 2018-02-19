@@ -17,7 +17,7 @@ public class DriveDistance extends Command {
 	public DriveDistance(double distance) {
 		this.requires(driveSystem);
 		this.distance = distance * UNITS_PER_INCH;
-		DriveSystem.getInstance().setPeakOutput(.3);
+		DriveSystem.getInstance().setPeakOutput(.5);
 	}
 	
 	public void execute() {

@@ -3,12 +3,15 @@ package frc.team4533.robot;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team4533.robot.commands.Autonomous;
 import frc.team4533.robot.subsystems.DriveSystem;
 import frc.team4533.robot.subsystems.IntakeSystem;
 import frc.team4533.robot.subsystems.SwingArmSystem;
+import frc.team4533.robot.utilities.SmartDashboardValues;
+
 /**
  * The class that the robot runs through. It is the closest thing to a main method the program has.
  * @author 4533 Programming Team
@@ -17,8 +20,9 @@ import frc.team4533.robot.subsystems.SwingArmSystem;
 public class Robot extends IterativeRobot {
 
 	public static Autonomous autonomousCommand;
-	public static String gameData; 
-	public static SendableChooser<String> positionChooser;
+	public static String gameData;
+	public SmartDashboardValues smartDashboardValues;
+	public SendableChooser<String> autoPositionChooser;
 	
 	/**
 	 * Method is called when the robot is first turned on
@@ -29,13 +33,13 @@ public class Robot extends IterativeRobot {
 		IntakeSystem.initialize();
 		SwingArmSystem.initialize();
 		OI.initialize();
-		positionChooser = new SendableChooser<String>();
-		positionChooser.addDefault("Left Position", "L");
-		positionChooser.addObject("Middle Position", "M");
-		positionChooser.addObject("Right Position", "R");
-		SmartDashboard.putData(positionChooser);
 		DriveSystem.getInstance().resetAngle();
-		
+		smartDashboardValues = new SmartDashboardValues();
+		autoPositionChooser = new SendableChooser<String>();
+		autoPositionChooser.addDefault("Left Position", "L");
+		autoPositionChooser.addObject("Middle Position", "M");
+		autoPositionChooser.addObject("Right Position", "R");
+		SmartDashboard.putData(autoPositionChooser);
 	}
 	/**
 	 * What is called when the robot first recognizes it is disabled
@@ -62,7 +66,7 @@ public class Robot extends IterativeRobot {
 		DriveSystem.getInstance().setPeakOutput(.5);
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		DriveSystem.getInstance().resetAngle();
-		autonomousCommand = new Autonomous(gameData, positionChooser.getSelected());
+		autonomousCommand = new Autonomous(gameData, autoPositionChooser.getSelected());
 		DriveSystem.getInstance().setPIDFValues(0.1, 0.0001, 0, 0);
 		DriveSystem.getInstance().setPosition(0);
 		
@@ -75,12 +79,7 @@ public class Robot extends IterativeRobot {
 	
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
-		SmartDashboard.putNumber("Robot Angle", DriveSystem.getInstance().getAngle());
-		SmartDashboard.putNumber("Left Position", DriveSystem.getInstance().getLeftPosition());
-		SmartDashboard.putNumber("Right Position", DriveSystem.getInstance().getRightPosition());
-		System.out.println(DriveSystem.getInstance().getAngle());
-		SmartDashboard.putNumber("Left Velocity", DriveSystem.getInstance().getLeftVelocity());
-		SmartDashboard.putNumber("Right Velocity", DriveSystem.getInstance().getRightVelocity());
+		smartDashboardValues.updateValues();
 	}
 
 	/**
@@ -112,14 +111,7 @@ public class Robot extends IterativeRobot {
 	
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		SmartDashboard.putNumber("Left Velocity", DriveSystem.getInstance().getLeftVelocity());
-		SmartDashboard.putNumber("Right Velocity", DriveSystem.getInstance().getRightVelocity());
-		SmartDashboard.putNumber("Target L", DriveSystem.getInstance().getLTargetVelocity());
-		SmartDashboard.putNumber("Target R", DriveSystem.getInstance().getRTargetVelocity());
-		SmartDashboard.putNumber("Potentiometer", SwingArmSystem.getInstance().position());
-		SmartDashboard.putNumber("Potentiometer Angle", SwingArmSystem.getInstance().angle());
-		SmartDashboard.putData("Pid Stuff", SwingArmSystem.getInstance().getPIDController());
-		SmartDashboard.putNumber("Robot Angle", DriveSystem.getInstance().getAngle());
+		smartDashboardValues.updateValues();
 	}
 	
 	
