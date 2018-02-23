@@ -2,10 +2,7 @@ package frc.team4533.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.team4533.robot.commands.MoveSwingArm;
-import frc.team4533.robot.commands.PushOut;
-import frc.team4533.robot.commands.SwingArmDown;
-import frc.team4533.robot.commands.TakeIn;
+import frc.team4533.robot.commands.*;
 import frc.team4533.robot.subsystems.IntakeSystem;
 import frc.team4533.robot.subsystems.SwingArmSystem;
 /**
@@ -16,6 +13,8 @@ import frc.team4533.robot.subsystems.SwingArmSystem;
 public class OI {
 	private Joystick j = new Joystick(RobotMap.JOYSTICK_PORT);
 	private static OI INSTANCE;
+
+
 	private JoystickButton intakeIn = new JoystickButton(j, RobotMap.LEFT_BUMPER);
 	private JoystickButton intakeOut = new JoystickButton(j, RobotMap.LEFT_TRIGGER);
 	private JoystickButton arm55 = new JoystickButton(j, RobotMap.Y_BUTTON);
@@ -30,7 +29,7 @@ public class OI {
 		IntakeSystem.initialize();
 		SwingArmSystem.initialize();
 		intakeIn.whileHeld(new TakeIn());
-		intakeOut.whileHeld(new PushOut());
+		intakeOut.whileHeld(new PushOut(.75));
 		arm55.whenPressed(new MoveSwingArm(55));
 		//When intake detected move to 10
 		arm5.whenPressed(new MoveSwingArm(5));

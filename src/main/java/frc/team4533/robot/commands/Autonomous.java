@@ -40,7 +40,7 @@ public class Autonomous extends CommandGroup {
 			// Releases the cube
 			// this.addSequential(new MoveSwingArm(40));
 			this.addSequential(new DriveDistance(10));
-			this.addSequential(new PushOut());
+			this.addSequential(new PushOut(.5));
 		}
 
 		// The other times that we are not lined up
@@ -54,12 +54,12 @@ public class Autonomous extends CommandGroup {
 			}
 			// If we put our robot in the middle of the field
 			if (position.equals("M")) {
-				this.addSequential(new DriveDistance(50));
+				this.addSequential(new DriveDistance(140));
 			}
 
 			// If we are on the opposite side of the field
 			else {
-				this.addSequential(new DriveDistance(120));
+				this.addSequential(new DriveDistance(240));
 			}
 			// Determine which way we need to turn to face the opposing side of
 			// the field
@@ -79,7 +79,7 @@ public class Autonomous extends CommandGroup {
 			this.addSequential(new DriveDistance(10));
 			// Releases the cube
 			// this.addSequential(new MoveSwingArm(40));
-			this.addSequential(new PushOut());
+			this.addSequential(new PushOut(.5));
 		}
 	}
 }

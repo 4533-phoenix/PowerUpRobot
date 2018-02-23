@@ -7,6 +7,8 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team4533.robot.RobotMap;
+import frc.team4533.robot.commands.AutoLift;
+
 /**
  * The system that allows the robot to move the intake up and down.
  * @author 4533 Programming Team
@@ -76,7 +78,7 @@ public class SwingArmSystem extends PIDSubsystem {
 	@Override
 	protected void initDefaultCommand() {
 
-		
+		this.setDefaultCommand(new AutoLift());
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package frc.team4533.robot.commands;
 
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.team4533.robot.RobotMap;

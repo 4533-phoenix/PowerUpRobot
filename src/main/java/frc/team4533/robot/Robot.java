@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team4533.robot.commands.Autonomous;
+import frc.team4533.robot.commands.MiddleAuto;
 import frc.team4533.robot.subsystems.DriveSystem;
 import frc.team4533.robot.subsystems.IntakeSystem;
 import frc.team4533.robot.subsystems.SwingArmSystem;
@@ -19,11 +20,11 @@ import frc.team4533.robot.utilities.SmartDashboardValues;
  */
 public class Robot extends IterativeRobot {
 
-	public static Autonomous autonomousCommand;
+	//public static Autonomous autonomousCommand;
+	public static MiddleAuto MAuto;
 	public static String gameData;
 	public SmartDashboardValues smartDashboardValues;
 	public SendableChooser<String> autoPositionChooser;
-	
 	/**
 	 * Method is called when the robot is first turned on
 	 * Initializes all of the subsystems and OI.
@@ -66,11 +67,13 @@ public class Robot extends IterativeRobot {
 		DriveSystem.getInstance().setPeakOutput(.5);
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		DriveSystem.getInstance().resetAngle();
-		autonomousCommand = new Autonomous(gameData, autoPositionChooser.getSelected());
+		//autonomousCommand = new Autonomous(gameData, autoPositionChooser.getSelected());
+		MAuto = new MiddleAuto(gameData);
 		DriveSystem.getInstance().setPIDFValues(0.1, 0.0001, 0, 0);
 		DriveSystem.getInstance().setPosition(0);
-		
-		autonomousCommand.start();
+		DriveSystem.getInstance().setRampRate(0);
+		//autonomousCommand.start();
+		MAuto.start();
 	}
 
 	/**
@@ -90,8 +93,8 @@ public class Robot extends IterativeRobot {
 	 	f = 1023 / 3168 = 0.323
 	 */
 	public void teleopInit() {
-		if(autonomousCommand != null) {
-			autonomousCommand.cancel();
+		if(MAuto != null) {
+			MAuto.cancel();
 		}
 		// F-Gain = ( 100% * 1023 ) / MagneticEncoderVelocity
 		//   MagneticEncoderVelocity determinted from TalonSRX self-test
@@ -101,7 +104,7 @@ public class Robot extends IterativeRobot {
 			DriveSystem.getInstance().setPIDFValues(.15, 0, 2.5, 0.243);
 		}
 		DriveSystem.getInstance().setPeakOutput(1);
-		
+		DriveSystem.getInstance().setRampRate(.25);
 		
 	}
 	/**

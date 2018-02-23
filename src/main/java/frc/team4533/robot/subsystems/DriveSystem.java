@@ -68,6 +68,8 @@ public class DriveSystem extends Subsystem {
 	private Port navXPort;
 	
 	private AHRS navX;
+
+
 	/**
 	 * Sets up motor controllers and the encoders on them
 	 */
@@ -101,8 +103,7 @@ public class DriveSystem extends Subsystem {
 		navXPort = SPI.Port.kMXP;
 		navX = new AHRS(navXPort);
 
-		leftMaster.configClosedloopRamp(.5, TIMEOUT);
-		rightMaster.configClosedloopRamp(.5, TIMEOUT);
+
 	}
 
 	/**
@@ -339,5 +340,10 @@ public class DriveSystem extends Subsystem {
 		leftMaster.configPeakOutputForward(output, TIMEOUT);
 		leftMaster.configPeakOutputReverse(-output, TIMEOUT);
 		rightMaster.configPeakOutputReverse(-output, TIMEOUT);
+	}
+
+	public void setRampRate(double secondsToMax) {
+		leftMaster.configClosedloopRamp(secondsToMax, TIMEOUT);
+		rightMaster.configClosedloopRamp(secondsToMax, TIMEOUT);
 	}
 }

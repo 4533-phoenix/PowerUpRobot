@@ -1,11 +1,13 @@
 package frc.team4533.robot;
+
+import edu.wpi.first.wpilibj.Joystick;
+
 /**
  * A place for all of the static values used on the robot
  * @author 4533 Programming Team
  *
  */
 public class RobotMap {
-
 	// Controller Mappings
 	
 	/**
@@ -134,6 +136,6 @@ public class RobotMap {
 	 */
 	
 	public static boolean PID_DRIVE_MODE = true;
-	
-	
+
+	public static boolean IS_IN_X_MODE = false;
 }

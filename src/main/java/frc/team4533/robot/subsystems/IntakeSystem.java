@@ -53,9 +53,9 @@ public class IntakeSystem extends Subsystem {
 	/**
 	 * Sets the motors to push the cube out
 	 */
-	public void out() {
-		leftMotor.set(ControlMode.PercentOutput, .75);
-		rightMotor.set(ControlMode.PercentOutput, .75);
+	public void out(double percent) {
+		leftMotor.set(ControlMode.PercentOutput, percent);
+		rightMotor.set(ControlMode.PercentOutput, percent);
 	}
 	/**
 	 * Stops the motors
@@ -69,7 +69,7 @@ public class IntakeSystem extends Subsystem {
 	 * @return False because we have no sensor on the intake yet
 	 */
 	public boolean hasCube() {
-		if(boxSensor.getValue() == 0) {
+		if(boxSensor.getValue() >= 12 && boxSensor.getValue() <= 30) {
 			return true;
 		}
 		return false;
