@@ -20,12 +20,16 @@ public class MotionProfile extends Command {
         this.leftProfile = lprofile;
         this.rightProfile = rprofile;
         DriveSystem.getInstance().setPeakOutput(.3);
+        driveSystem.startFilling(leftProfile,leftProfile.length,false);
+        driveSystem.startFilling(rightProfile,rightProfile.length,true);
+
     }
 
     public void execute() {
         DriveSystem.getInstance().setPIDFValues(0.1, 0.0001, 0, 0);
-        driveSystem.startFilling(leftProfile,leftProfile.length,false);
-        driveSystem.startFilling(rightProfile,rightProfile.length,true);
+        driveSystem.driveMotionProfile(leftProfile.length,false);
+
+        driveSystem.driveMotionProfile(rightProfile.length,true);
     }
 
     @Override

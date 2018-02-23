@@ -143,14 +143,23 @@ public class DriveSystem extends Subsystem {
 			point.profileSlotSelect0=0;
 			if(isRight) {
 				rightMaster.pushMotionProfileTrajectory(point);
-				rightMaster.set(ControlMode.MotionProfile,1.0);
-				rightSlave.set(ControlMode.Follower, RobotMap.MOTOR_RIGHT_MASTER);
 			}else {
 				leftMaster.pushMotionProfileTrajectory(point);
-				leftMaster.set(ControlMode.MotionProfile,1.0);
+			}
+		}
+	}
+
+	public void driveMotionProfile(int totalCount,boolean isRight){
+		for(int i=0;i<totalCount;i++) {
+			if (isRight) {
+				rightMaster.set(ControlMode.MotionProfile, 1.0);
+				rightSlave.set(ControlMode.Follower, RobotMap.MOTOR_RIGHT_MASTER);
+			} else {
+				leftMaster.set(ControlMode.MotionProfile, 1.0);
 				leftSlave.set(ControlMode.Follower, RobotMap.MOTOR_LEFT_MASTER);
 			}
 		}
+
 	}
 
 	public void setPIDFValues(double p, double i, double d, double f) {
