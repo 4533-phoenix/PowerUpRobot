@@ -1,7 +1,10 @@
 package frc.team4533.robot.subsystems;
 
+import com.ctre.CANTalon;
+import com.ctre.phoenix.motion.TrajectoryPoint;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
@@ -71,6 +74,7 @@ public class DriveSystem extends Subsystem {
 	/**
 	 * Sets up motor controllers and the encoders on them
 	 */
+
 	public DriveSystem() {
 		rightMaster = new WPI_TalonSRX(RobotMap.MOTOR_RIGHT_MASTER);
 		leftMaster = new WPI_TalonSRX(RobotMap.MOTOR_LEFT_MASTER);
@@ -122,16 +126,33 @@ public class DriveSystem extends Subsystem {
 
 	/**
 	 * Sets the motor controllers to follow specific PIDF loop
-	 * 
-	 * @param p
-	 *            Proportional Gain
-	 * @param i
-	 *            Integral Gain
-	 * @param d
-	 *            Derivative Gain
-	 * @param f
+	 *
 	 *            Feed-forward Gain
 	 */
+
+	public void startFilling(double[][] profile,int totalCount,boolean isRight){
+		TrajectoryPoint point=new TrajectoryPoint();
+
+		for(int i=0;i<totalCount;i++){
+			point.position=profile[i][0];
+			point.velocity=profile[i][1];
+			TrajectoryPoint.TrajectoryDuration dur;
+			dur = TrajectoryPoint.TrajectoryDuration.Trajectory_Duration_0ms;
+			dur.value=(int)profile[i][2];
+			point.timeDur=dur;
+			point.profileSlotSelect0=0;
+			if(isRight) {
+				rightMaster.pushMotionProfileTrajectory(point);
+				rightMaster.set(ControlMode.MotionProfile,1.0);
+				rightSlave.set(ControlMode.Follower, RobotMap.MOTOR_RIGHT_MASTER);
+			}else {
+				leftMaster.pushMotionProfileTrajectory(point);
+				leftMaster.set(ControlMode.MotionProfile,1.0);
+				leftSlave.set(ControlMode.Follower, RobotMap.MOTOR_LEFT_MASTER);
+			}
+		}
+	}
+
 	public void setPIDFValues(double p, double i, double d, double f) {
 		leftMaster.config_kF(DEFAULT_PID_INDEX, f, TIMEOUT);
 		leftMaster.config_kP(DEFAULT_PID_INDEX, p, TIMEOUT);
