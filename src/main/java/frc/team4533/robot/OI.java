@@ -18,6 +18,7 @@ public class OI {
 	private JoystickButton intakeIn = new JoystickButton(j, RobotMap.LEFT_BUMPER);
 	private JoystickButton intakeOut = new JoystickButton(j, RobotMap.LEFT_TRIGGER);
 	private JoystickButton arm55 = new JoystickButton(j, RobotMap.Y_BUTTON);
+	private JoystickButton armFast55 = new JoystickButton(j, RobotMap.RIGHT_BUMPER);
 	private JoystickButton arm15 = new JoystickButton(j, RobotMap.X_BUTTON);
 	private JoystickButton arm20 = new JoystickButton(j, RobotMap.B_BUTTON);
 	private JoystickButton arm5 = new JoystickButton(j, RobotMap.A_BUTTON);
@@ -31,6 +32,7 @@ public class OI {
 		intakeIn.whileHeld(new TakeIn());
 		intakeOut.whileHeld(new PushOut(.75));
 		arm55.whenPressed(new MoveSwingArm(55));
+		armFast55.whenPressed(new MoveSwingArm(55));
 		//When intake detected move to 10
 		arm5.whenPressed(new MoveSwingArm(5));
 		arm15.whenPressed(new MoveSwingArm(15));

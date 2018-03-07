@@ -1,5 +1,6 @@
 package frc.team4533.robot;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -12,7 +13,7 @@ import frc.team4533.robot.subsystems.DriveSystem;
 import frc.team4533.robot.subsystems.IntakeSystem;
 import frc.team4533.robot.subsystems.SwingArmSystem;
 import frc.team4533.robot.utilities.SmartDashboardValues;
-
+import edu.wpi.first.wpilibj.CameraServer;
 /**
  * The class that the robot runs through. It is the closest thing to a main method the program has.
  * @author 4533 Programming Team
@@ -25,6 +26,7 @@ public class Robot extends IterativeRobot {
 	public static String gameData;
 	public SmartDashboardValues smartDashboardValues;
 	public SendableChooser<String> autoPositionChooser;
+	private CameraServer cameraServer;
 	/**
 	 * Method is called when the robot is first turned on
 	 * Initializes all of the subsystems and OI.
@@ -41,6 +43,8 @@ public class Robot extends IterativeRobot {
 		autoPositionChooser.addObject("Middle Position", "M");
 		autoPositionChooser.addObject("Right Position", "R");
 		SmartDashboard.putData(autoPositionChooser);
+		cameraServer = CameraServer.getInstance();
+		cameraServer.startAutomaticCapture();
 	}
 	/**
 	 * What is called when the robot first recognizes it is disabled

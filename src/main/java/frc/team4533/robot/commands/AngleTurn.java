@@ -16,9 +16,9 @@ public class AngleTurn extends Command {
 		this.angle = angle;
 		DriveSystem.getInstance().resetAngle();
 	}
-	
+	//P was at .15
 	public void execute() {
-		DriveSystem.getInstance().setPIDFValues(.15, 0, 2.5, 0.243);
+		DriveSystem.getInstance().setPIDFValues(.25, 0, 2.5, 0.243);
 		if(angle > 0) {
 			DriveSystem.getInstance().driveVelocity(-.35, .35);
 		}

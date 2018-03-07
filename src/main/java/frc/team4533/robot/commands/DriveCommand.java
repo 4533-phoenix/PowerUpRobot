@@ -5,6 +5,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.team4533.robot.RobotMap;
 import frc.team4533.robot.subsystems.DriveSystem;
+import frc.team4533.robot.subsystems.SwingArmSystem;
+
 /**
  * The command that drives the robot. It can run the robot in percent output or in velocity modes.
  * @author 4533 Programming Team
@@ -14,6 +16,7 @@ public class DriveCommand extends Command {
 
 	private Joystick controller;
 	private DriveSystem driveSystem = DriveSystem.getInstance();
+	private SwingArmSystem swingArmSystem = SwingArmSystem.getInstance();
 	
 	public DriveCommand() {
 		controller = new Joystick(RobotMap.JOYSTICK_PORT);
