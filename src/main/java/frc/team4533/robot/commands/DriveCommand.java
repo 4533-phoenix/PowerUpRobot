@@ -33,7 +33,7 @@ public class DriveCommand extends Command {
 			driveSystem.setVelocity(500);
 		}
 		else {
-			driveSystem.setVelocity(250);
+			driveSystem.setVelocity(300);
 		}
 		if (Math.abs(rightStick) <= .05) {
 			rightStick = 0;

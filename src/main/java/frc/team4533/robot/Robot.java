@@ -7,7 +7,9 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.team4533.robot.commands.AutoVault;
 import frc.team4533.robot.commands.Autonomous;
+import frc.team4533.robot.commands.JamesAutonomous;
 import frc.team4533.robot.commands.MiddleAuto;
 import frc.team4533.robot.subsystems.DriveSystem;
 import frc.team4533.robot.subsystems.IntakeSystem;
@@ -23,9 +25,13 @@ public class Robot extends IterativeRobot {
 
 	//public static Autonomous autonomousCommand;
 	public static MiddleAuto MAuto;
+	public static JamesAutonomous testAuto;
+	public static Autonomous LRAuto;
+	public static AutoVault VAuto;
 	public static String gameData;
 	public SmartDashboardValues smartDashboardValues;
 	public SendableChooser<String> autoPositionChooser;
+	public SendableChooser<String> autoObjectiveChooser;
 	private CameraServer cameraServer;
 	/**
 	 * Method is called when the robot is first turned on
@@ -39,9 +45,13 @@ public class Robot extends IterativeRobot {
 		DriveSystem.getInstance().resetAngle();
 		smartDashboardValues = new SmartDashboardValues();
 		autoPositionChooser = new SendableChooser<String>();
-		autoPositionChooser.addDefault("Left Position", "L");
-		autoPositionChooser.addObject("Middle Position", "M");
+		autoObjectiveChooser = new SendableChooser<String>();
+		autoPositionChooser.addDefault("Middle Position", "M");
+		autoPositionChooser.addObject("Left Position", "L");
 		autoPositionChooser.addObject("Right Position", "R");
+		autoObjectiveChooser.addObject("Switch", "S");
+		autoObjectiveChooser.addObject("Vault", "V");
+		autoObjectiveChooser.addObject("Test","T");
 		SmartDashboard.putData(autoPositionChooser);
 		cameraServer = CameraServer.getInstance();
 		cameraServer.startAutomaticCapture();
@@ -68,17 +78,33 @@ public class Robot extends IterativeRobot {
 	 */
 	
 	public void autonomousInit() {
-		DriveSystem.getInstance().setPeakOutput(.5);
-		gameData = DriverStation.getInstance().getGameSpecificMessage();
-		DriveSystem.getInstance().resetAngle();
-		//autonomousCommand = new Autonomous(gameData, autoPositionChooser.getSelected());
-		MAuto = new MiddleAuto(gameData);
-		DriveSystem.getInstance().setPIDFValues(0.1, 0.0001, 0, 0);
-		DriveSystem.getInstance().setPosition(0);
-		DriveSystem.getInstance().setRampRate(0);
-		//autonomousCommand.start();
-		MAuto.start();
-	}
+        DriveSystem.getInstance().setPeakOutput(.5);
+        gameData = DriverStation.getInstance().getGameSpecificMessage();
+        DriveSystem.getInstance().resetAngle();
+        //autonomousCommand = new Autonomous(gameData, autoPositionChooser.getSelected());
+        MAuto = new MiddleAuto(gameData);//"f10r23.97f85l15o0.35"
+        testAuto = new JamesAutonomous(gameData);
+        LRAuto = new Autonomous(gameData, autoPositionChooser.getSelected());
+        VAuto = new AutoVault(autoPositionChooser.getSelected());
+        DriveSystem.getInstance().setPIDFValues(0.1, 0.0001, 0, 0);
+        DriveSystem.getInstance().setPosition(0);
+        DriveSystem.getInstance().setRampRate(0);
+        //autonomousCommand.start();
+        //if (autoObjectiveChooser.getSelected().equals("S")) {
+            if (autoPositionChooser.getSelected().equals("M")) {
+                MAuto.start();
+            }
+            else if(autoPositionChooser.getSelected().equals("L") || autoPositionChooser.getSelected().equals("R")) {
+                LRAuto.start();
+            }
+        //}
+        //else if(autoObjectiveChooser.getSelected().equals("T")) {
+            //testAuto.start();
+        //}
+        //else if(autoObjectiveChooser.getSelected().equals("V")) {
+        	//VAuto.start();
+		//}
+    }
 
 	/**
 	 * Called constantly during the Autonomous Period
