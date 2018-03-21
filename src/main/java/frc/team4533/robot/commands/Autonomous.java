@@ -25,11 +25,12 @@ public class Autonomous extends CommandGroup {
 //		this.gameData = gameData;
 //		this.position = position;
 		// The lucky time that we are lined up perfectly
+        this.addSequential(new DriveDistance(120));
 		if ((gameData.substring(0, 1).equals("L") && position.equals("L")) || (gameData.substring(0, 1).equals("R") && position.equals("R"))) {
 			// Move to and cross the Auto Line
-			this.addSequential(new DriveDistance(120));
+
 			// Move to the switch
-			this.addSequential(new DriveDistance(24));
+			this.addSequential(new DriveDistance(18));
 			
 			// Determine which way to turn
 			if (gameData.substring(0, 1).equals("L")) {
@@ -39,47 +40,47 @@ public class Autonomous extends CommandGroup {
 			}
 			// Releases the cube
 			// this.addSequential(new MoveSwingArm(40));
-			this.addSequential(new DriveDistance(10));
+			this.addSequential(new DriveDistance(25),2);
 			this.addSequential(new PushOut(.5));
 		}
 
 		// The other times that we are not lined up
 		else {
-			this.addSequential(new DriveDistance(40));
-			// Determine which direction we need to move
-			if (gameData.substring(0, 1).equals("L")) {
-				this.addSequential(new AngleTurn(-90));
-			} else {
-				this.addSequential(new AngleTurn(90));
-			}
-			// If we put our robot in the middle of the field
-			if (position.equals("M")) {
-				this.addSequential(new DriveDistance(140));
-			}
-
-			// If we are on the opposite side of the field
-			else {
-				this.addSequential(new DriveDistance(240));
-			}
-			// Determine which way we need to turn to face the opposing side of
-			// the field
-			if (gameData.substring(0, 1).equals("L")) {
-				this.addSequential(new AngleTurn(90));
-			} else {
-				this.addSequential(new AngleTurn(-90));
-			}
-			// Move to the switch
-			this.addSequential(new DriveDistance(94));
-			// Determine which way to face the switch
-			if (gameData.substring(0, 1).equals("L")) {
-				this.addSequential(new AngleTurn(90));
-			} else {
-				this.addSequential(new AngleTurn(-90));
-			}
-			this.addSequential(new DriveDistance(10));
-			// Releases the cube
-			// this.addSequential(new MoveSwingArm(40));
-			this.addSequential(new PushOut(.5));
+			//this.addSequential(new DriveDistance(120));
+//			// Determine which direction we need to move
+//			if (gameData.substring(0, 1).equals("L")) {
+//				this.addSequential(new AngleTurn(-90));
+//			} else {
+//				this.addSequential(new AngleTurn(90));
+//			}
+//			// If we put our robot in the middle of the field
+//			if (position.equals("M")) {
+//				this.addSequential(new DriveDistance(140));
+//			}
+//
+//			// If we are on the opposite side of the field
+//			else {
+//				this.addSequential(new DriveDistance(240));
+//			}
+//			// Determine which way we need to turn to face the opposing side of
+//			// the field
+//			if (gameData.substring(0, 1).equals("L")) {
+//				this.addSequential(new AngleTurn(90));
+//			} else {
+//				this.addSequential(new AngleTurn(-90));
+//			}
+//			// Move to the switch
+//			this.addSequential(new DriveDistance(94));
+//			// Determine which way to face the switch
+//			if (gameData.substring(0, 1).equals("L")) {
+//				this.addSequential(new AngleTurn(90));
+//			} else {
+//				this.addSequential(new AngleTurn(-90));
+//			}
+//			this.addSequential(new DriveDistance(10));
+//			// Releases the cube
+//			// this.addSequential(new MoveSwingArm(40));
+//			this.addSequential(new PushOut(.5));
 		}
 	}
 }

@@ -19,6 +19,7 @@ public class RobotMap {
 	 * This is the value for the button under the right analog stick.
 	 * 
 	 */
+	public static int BUTTON_PORT = 1;
 	public static int RIGHT_STICK_BUTTON = 12;
 	/**
 	 * This is the value for the button under the left analog stick.

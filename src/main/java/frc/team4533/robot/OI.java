@@ -12,16 +12,22 @@ import frc.team4533.robot.subsystems.SwingArmSystem;
  */
 public class OI {
 	private Joystick j = new Joystick(RobotMap.JOYSTICK_PORT);
+	private Joystick buttons = new Joystick(RobotMap.BUTTON_PORT);
 	private static OI INSTANCE;
 
 
 	private JoystickButton intakeIn = new JoystickButton(j, RobotMap.LEFT_BUMPER);
 	private JoystickButton intakeOut = new JoystickButton(j, RobotMap.LEFT_TRIGGER);
-	private JoystickButton arm55 = new JoystickButton(j, RobotMap.Y_BUTTON);
-	private JoystickButton armFast55 = new JoystickButton(j, RobotMap.RIGHT_BUMPER);
+	private JoystickButton arm62 = new JoystickButton(j, RobotMap.Y_BUTTON);
+	private JoystickButton armFast62 = new JoystickButton(j, RobotMap.RIGHT_BUMPER);
 	private JoystickButton arm15 = new JoystickButton(j, RobotMap.X_BUTTON);
 	private JoystickButton arm20 = new JoystickButton(j, RobotMap.B_BUTTON);
 	private JoystickButton arm5 = new JoystickButton(j, RobotMap.A_BUTTON);
+	private JoystickButton redButton = new JoystickButton(buttons, 12);
+	private JoystickButton startBtn = new JoystickButton(buttons, 11);
+	private JoystickButton switchBtn = new JoystickButton(buttons, 10);
+	private JoystickButton vaultBtn = new JoystickButton(buttons, 9);
+	private JoystickButton floorBtn = new JoystickButton(buttons, 8);
 	
 	/**
 	 * Creates the controls for the robots
@@ -31,12 +37,16 @@ public class OI {
 		SwingArmSystem.initialize();
 		intakeIn.whileHeld(new TakeIn());
 		intakeOut.whileHeld(new PushOut(.75));
-		arm55.whenPressed(new MoveSwingArm(55));
-		armFast55.whenPressed(new MoveSwingArm(55));
+		arm62.whenPressed(new MoveSwingArm(62));
+		armFast62.whenPressed(new MoveSwingArm(62));
 		//When intake detected move to 10
 		arm5.whenPressed(new MoveSwingArm(5));
 		arm15.whenPressed(new MoveSwingArm(15));
 		arm20.whenPressed(new MoveSwingArm(20));
+		startBtn.whenPressed(new MoveSwingArm(62));
+		switchBtn.whenPressed(new MoveSwingArm(45));
+		vaultBtn.whenPressed(new MoveSwingArm(15));
+		floorBtn.whenPressed(new MoveSwingArm(5));
 	}
 	/**
 	 * @return Instance: An instance of OI
