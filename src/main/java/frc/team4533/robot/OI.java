@@ -38,15 +38,16 @@ public class OI {
 		intakeIn.whileHeld(new TakeIn());
 		intakeOut.whileHeld(new PushOut(.75));
 		arm62.whenPressed(new MoveSwingArm(62));
-		armFast62.whenPressed(new MoveSwingArm(62));
+		//armFast62.whenPressed(new MoveSwingArm(62));
 		//When intake detected move to 10
 		arm5.whenPressed(new MoveSwingArm(5));
 		arm15.whenPressed(new MoveSwingArm(15));
 		arm20.whenPressed(new MoveSwingArm(20));
 		startBtn.whenPressed(new MoveSwingArm(62));
-		switchBtn.whenPressed(new MoveSwingArm(45));
+		switchBtn.whenPressed(new MoveSwingArm(20));
 		vaultBtn.whenPressed(new MoveSwingArm(15));
 		floorBtn.whenPressed(new MoveSwingArm(5));
+		redButton.whileHeld(new ExtraButtonCommand());
 	}
 	/**
 	 * @return Instance: An instance of OI
