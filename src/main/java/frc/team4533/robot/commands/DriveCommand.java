@@ -1,5 +1,6 @@
 package frc.team4533.robot.commands;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
@@ -42,9 +43,20 @@ public class DriveCommand extends Command {
 			leftStick = 0;
 		}
 		if (RobotMap.PID_DRIVE_MODE) {
-			driveSystem.driveVelocity(leftStick, rightStick);
+			if(DriverStation.getInstance().getJoystickName(0).equals("2In1 USB Joystick")) {
+				driveSystem.driveVelocity(-leftStick, -rightStick);
+			}
+			else {
+				driveSystem.driveVelocity(leftStick, rightStick);
+			}
 		} else {
-			driveSystem.driveAction(leftStick, rightStick);
+			if(DriverStation.getInstance().getJoystickName(0).equals("2In1 USB Joystick")) {
+				driveSystem.driveAction(-leftStick, -rightStick);
+			}
+			else {
+				driveSystem.driveAction(leftStick, rightStick);
+			}
+
 		}
 	}
 

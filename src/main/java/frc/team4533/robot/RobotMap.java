@@ -1,5 +1,6 @@
 package frc.team4533.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 
 /**
@@ -139,4 +140,6 @@ public class RobotMap {
 	public static boolean PID_DRIVE_MODE = true;
 
 	public static boolean IS_IN_X_MODE = false;
+
+	public static String CONTROLLER_TYPE = DriverStation.getInstance().getJoystickName(0);
 }

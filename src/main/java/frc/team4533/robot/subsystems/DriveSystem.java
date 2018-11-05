@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team4533.robot.RobotMap;
 import frc.team4533.robot.commands.DriveCommand;
+import frc.team4533.robot.commands.JoystickDriveCommand;
+
 /**
  * The system that allows the robot move in a direction.
  * @author 4533 Programming Team
@@ -194,7 +196,21 @@ public class DriveSystem extends Subsystem {
 		}
 		printCounter++;
 	}
+	public void driveVelocityOneJoystick(double percentF, double percentS) {
+		targetL = percentF * MAX_VELOCITY * UNITS_PER_REVOLUTION / 600;
+		targetR = percentF * MAX_VELOCITY * UNITS_PER_REVOLUTION / 600;
+		if(percentS > .5) {
+			targetL *= -percentS;
+		}
+		if(percentS < .5) {
+			targetR *= percentS;
+		}
+		leftMaster.set(ControlMode.Velocity, -targetL);
+		rightMaster.set(ControlMode.Velocity, -targetR);
+		leftSlave.set(ControlMode.Velocity, -targetL);
+		rightSlave.set(ControlMode.Velocity, -targetR);
 
+	}
 	/**
 	 * Sets the motor controllers to run using position mode
 	 * 
@@ -212,7 +228,13 @@ public class DriveSystem extends Subsystem {
 	 * Sets the default command for the method
 	 */
 	public void initDefaultCommand() {
-		this.setDefaultCommand(new DriveCommand());
+		if(RobotMap.CONTROLLER_TYPE.equals("Logitech Attack 3")) {
+			this.setDefaultCommand(new JoystickDriveCommand());
+		}
+		else {
+			this.setDefaultCommand(new DriveCommand());
+		}
+
 	}
 
 	// Just some methods we can use in autonomous

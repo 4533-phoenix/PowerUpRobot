@@ -1,5 +1,6 @@
 package frc.team4533.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.team4533.robot.commands.*;
@@ -35,6 +36,13 @@ public class OI {
 	public OI(){
 		IntakeSystem.initialize();
 		SwingArmSystem.initialize();
+		if(DriverStation.getInstance().getJoystickName(0).equals("2In1 USB Joystick")) {
+			arm62 = new JoystickButton(j, 1);
+			arm15 = new JoystickButton(j, 4);
+			arm20 = new JoystickButton(j, 2);
+			arm5 = new JoystickButton(j, 3);
+
+		}
 		intakeIn.whileHeld(new TakeIn());
 		intakeOut.whileHeld(new PushOut(.75));
 		arm62.whenPressed(new MoveSwingArm(62));
